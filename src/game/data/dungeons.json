@@ -1,0 +1,347 @@
+[
+  {
+    "id": "d1_emberfall",
+    "displayName": "Emberfall Grove",
+    "tilesetKey": "d1_emberfall",
+    "palette": {
+      "floor": 3025466,
+      "floorAlt": 3814480,
+      "wall": 1709606,
+      "wallTop": 2367283,
+      "accent": 8363887
+    },
+    "entryRoomId": "d1_entry",
+    "bossRoomId": "d1_sanctum",
+    "rooms": [
+      {
+        "id": "d1_entry",
+        "tiledMapKey": "d1_entry",
+        "exits": [
+          {
+            "direction": "e",
+            "targetRoomId": "d1_hall",
+            "locked": true
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          }
+        ],
+        "cleared": false
+      },
+      {
+        "id": "d1_hall",
+        "tiledMapKey": "d1_hall",
+        "exits": [
+          {
+            "direction": "w",
+            "targetRoomId": "d1_entry",
+            "locked": false
+          },
+          {
+            "direction": "n",
+            "targetRoomId": "d1_grove",
+            "locked": false
+          },
+          {
+            "direction": "e",
+            "targetRoomId": "d1_cistern",
+            "locked": true
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          }
+        ],
+        "cleared": false
+      },
+      {
+        "id": "d1_grove",
+        "tiledMapKey": "d1_grove",
+        "exits": [
+          {
+            "direction": "s",
+            "targetRoomId": "d1_hall",
+            "locked": false
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          },
+          {
+            "itemId": "blade_riverfang",
+            "weight": 3
+          },
+          {
+            "itemId": "spear_windrake",
+            "weight": 3
+          },
+          {
+            "itemId": "spell_frostlance",
+            "weight": 3
+          }
+        ],
+        "cleared": false,
+        "optional": true
+      },
+      {
+        "id": "d1_cistern",
+        "tiledMapKey": "d1_cistern",
+        "exits": [
+          {
+            "direction": "w",
+            "targetRoomId": "d1_hall",
+            "locked": false
+          },
+          {
+            "direction": "e",
+            "targetRoomId": "d1_warren",
+            "locked": true,
+            "channel": "cistern_gate"
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          }
+        ],
+        "cleared": false
+      },
+      {
+        "id": "d1_warren",
+        "tiledMapKey": "d1_warren",
+        "exits": [
+          {
+            "direction": "w",
+            "targetRoomId": "d1_cistern",
+            "locked": false
+          },
+          {
+            "direction": "s",
+            "targetRoomId": "d1_causeway",
+            "locked": true
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          },
+          {
+            "itemId": "blade_riverfang",
+            "weight": 3
+          },
+          {
+            "itemId": "spear_windrake",
+            "weight": 3
+          },
+          {
+            "itemId": "spell_frostlance",
+            "weight": 3
+          }
+        ],
+        "cleared": false
+      },
+      {
+        "id": "d1_causeway",
+        "tiledMapKey": "d1_causeway",
+        "exits": [
+          {
+            "direction": "n",
+            "targetRoomId": "d1_warren",
+            "locked": false
+          },
+          {
+            "direction": "s",
+            "targetRoomId": "d1_sanctum",
+            "locked": true
+          },
+          {
+            "direction": "e",
+            "targetRoomId": "d1_vault",
+            "locked": false
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          }
+        ],
+        "cleared": false
+      },
+      {
+        "id": "d1_vault",
+        "tiledMapKey": "d1_vault",
+        "exits": [
+          {
+            "direction": "w",
+            "targetRoomId": "d1_causeway",
+            "locked": false
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          },
+          {
+            "itemId": "blade_riverfang",
+            "weight": 3
+          },
+          {
+            "itemId": "spear_windrake",
+            "weight": 3
+          },
+          {
+            "itemId": "spell_frostlance",
+            "weight": 3
+          }
+        ],
+        "cleared": false,
+        "optional": true
+      },
+      {
+        "id": "d1_sanctum",
+        "tiledMapKey": "d1_sanctum",
+        "exits": [
+          {
+            "direction": "w",
+            "targetRoomId": "d1_causeway",
+            "locked": false
+          }
+        ],
+        "enemySpawns": [],
+        "lootTable": [
+          {
+            "itemId": "elixir_mend",
+            "weight": 10
+          },
+          {
+            "itemId": "draught_swift",
+            "weight": 6
+          },
+          {
+            "itemId": "draught_fury",
+            "weight": 6
+          },
+          {
+            "itemId": "ward_stone",
+            "weight": 5
+          },
+          {
+            "itemId": "blade_riverfang",
+            "weight": 3
+          },
+          {
+            "itemId": "spear_windrake",
+            "weight": 3
+          },
+          {
+            "itemId": "spell_frostlance",
+            "weight": 3
+          }
+        ],
+        "cleared": false
+      }
+    ]
+  }
+]

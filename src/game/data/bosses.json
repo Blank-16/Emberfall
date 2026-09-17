@@ -1,0 +1,157 @@
+[
+  {
+    "id": "warden_of_roots",
+    "displayName": "Warden of Roots",
+    "health": 420,
+    "moveSpeed": 58,
+    "aggroRange": 320,
+    "damage": 12,
+    "behavior": "melee_chaser",
+    "attackRange": 40,
+    "attackWindupMs": 420,
+    "attackActiveMs": 160,
+    "attackRecoveryMs": 520,
+    "fleeHealthRatio": 0,
+    "bodyRadius": 11,
+    "tint": 8367727,
+    "projectileSpeed": 150,
+    "isMiniBoss": true,
+    "currencyDrop": 60,
+    "dropTable": [
+      {
+        "itemId": "elixir_mend",
+        "weight": 10
+      },
+      {
+        "itemId": "ward_stone",
+        "weight": 6
+      }
+    ],
+    "attackPatterns": [
+      {
+        "attackId": "root_slam",
+        "kind": "slam",
+        "telegraphMs": 700,
+        "activeMs": 260,
+        "cooldownMs": 2600,
+        "damage": 16,
+        "projectileCount": 0,
+        "radius": 52,
+        "healthRatioMax": 1
+      },
+      {
+        "attackId": "thorn_spray",
+        "kind": "radial_burst",
+        "telegraphMs": 820,
+        "activeMs": 220,
+        "cooldownMs": 3600,
+        "damage": 9,
+        "projectileCount": 10,
+        "radius": 40,
+        "healthRatioMax": 1
+      },
+      {
+        "attackId": "lunge",
+        "kind": "charge",
+        "telegraphMs": 540,
+        "activeMs": 520,
+        "cooldownMs": 3200,
+        "damage": 14,
+        "projectileCount": 0,
+        "radius": 30,
+        "healthRatioMax": 0.6
+      }
+    ]
+  },
+  {
+    "id": "emberfall_ashwarden",
+    "displayName": "The Ashwarden",
+    "health": 760,
+    "moveSpeed": 64,
+    "aggroRange": 400,
+    "damage": 14,
+    "behavior": "melee_chaser",
+    "attackRange": 46,
+    "attackWindupMs": 420,
+    "attackActiveMs": 180,
+    "attackRecoveryMs": 520,
+    "fleeHealthRatio": 0,
+    "bodyRadius": 13,
+    "tint": 14839866,
+    "projectileSpeed": 180,
+    "isMiniBoss": false,
+    "currencyDrop": 150,
+    "dropTable": [
+      {
+        "itemId": "elixir_mend",
+        "weight": 10
+      },
+      {
+        "itemId": "draught_fury",
+        "weight": 8
+      },
+      {
+        "itemId": "ward_stone",
+        "weight": 8
+      }
+    ],
+    "attackPatterns": [
+      {
+        "attackId": "ash_slam",
+        "kind": "slam",
+        "telegraphMs": 640,
+        "activeMs": 260,
+        "cooldownMs": 2800,
+        "damage": 20,
+        "projectileCount": 0,
+        "radius": 62,
+        "healthRatioMax": 1
+      },
+      {
+        "attackId": "ember_volley",
+        "kind": "volley",
+        "telegraphMs": 620,
+        "activeMs": 900,
+        "cooldownMs": 3400,
+        "damage": 10,
+        "projectileCount": 3,
+        "radius": 40,
+        "healthRatioMax": 1
+      },
+      {
+        "attackId": "cinder_ring",
+        "kind": "radial_burst",
+        "telegraphMs": 760,
+        "activeMs": 240,
+        "cooldownMs": 4200,
+        "damage": 12,
+        "projectileCount": 14,
+        "radius": 44,
+        "healthRatioMax": 0.75
+      },
+      {
+        "attackId": "ashen_charge",
+        "kind": "charge",
+        "telegraphMs": 480,
+        "activeMs": 560,
+        "cooldownMs": 3000,
+        "damage": 18,
+        "projectileCount": 0,
+        "radius": 30,
+        "healthRatioMax": 0.55
+      },
+      {
+        "attackId": "call_stalkers",
+        "kind": "summon",
+        "telegraphMs": 900,
+        "activeMs": 300,
+        "cooldownMs": 9000,
+        "damage": 0,
+        "projectileCount": 3,
+        "radius": 56,
+        "healthRatioMax": 0.5,
+        "summonEnemyId": "ash_stalker"
+      }
+    ]
+  }
+]

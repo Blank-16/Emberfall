@@ -1,0 +1,120 @@
+[
+  {
+    "id": "husk_thrall",
+    "displayName": "Husk Thrall",
+    "health": 34,
+    "moveSpeed": 62,
+    "aggroRange": 150,
+    "damage": 9,
+    "behavior": "melee_chaser",
+    "attackRange": 26,
+    "attackWindupMs": 340,
+    "attackActiveMs": 130,
+    "attackRecoveryMs": 420,
+    "fleeHealthRatio": 0,
+    "bodyRadius": 5,
+    "tint": 9203614,
+    "dropTable": [
+      {
+        "itemId": "elixir_mend",
+        "weight": 8
+      },
+      {
+        "itemId": "draught_swift",
+        "weight": 4
+      },
+      {
+        "itemId": "none",
+        "weight": 30
+      }
+    ],
+    "currencyDrop": 4
+  },
+  {
+    "id": "thorn_slinger",
+    "displayName": "Thorn Slinger",
+    "health": 26,
+    "moveSpeed": 74,
+    "aggroRange": 200,
+    "damage": 7,
+    "behavior": "ranged_kiter",
+    "attackRange": 120,
+    "attackWindupMs": 420,
+    "attackActiveMs": 110,
+    "attackRecoveryMs": 520,
+    "fleeHealthRatio": 0.25,
+    "bodyRadius": 5,
+    "tint": 7319162,
+    "projectileSpeed": 170,
+    "dropTable": [
+      {
+        "itemId": "draught_fury",
+        "weight": 5
+      },
+      {
+        "itemId": "elixir_mend",
+        "weight": 6
+      },
+      {
+        "itemId": "none",
+        "weight": 28
+      }
+    ],
+    "currencyDrop": 5
+  },
+  {
+    "id": "bramble_turret",
+    "displayName": "Bramble Turret",
+    "health": 48,
+    "moveSpeed": 0,
+    "aggroRange": 210,
+    "damage": 8,
+    "behavior": "stationary_turret",
+    "attackRange": 200,
+    "attackWindupMs": 520,
+    "attackActiveMs": 140,
+    "attackRecoveryMs": 700,
+    "fleeHealthRatio": 0,
+    "bodyRadius": 7,
+    "tint": 11569743,
+    "projectileSpeed": 150,
+    "dropTable": [
+      {
+        "itemId": "ward_stone",
+        "weight": 6
+      },
+      {
+        "itemId": "none",
+        "weight": 24
+      }
+    ],
+    "currencyDrop": 7
+  },
+  {
+    "id": "ash_stalker",
+    "displayName": "Ash Stalker",
+    "health": 22,
+    "moveSpeed": 96,
+    "aggroRange": 230,
+    "damage": 11,
+    "behavior": "melee_chaser",
+    "attackRange": 24,
+    "attackWindupMs": 240,
+    "attackActiveMs": 110,
+    "attackRecoveryMs": 300,
+    "fleeHealthRatio": 0.2,
+    "bodyRadius": 5,
+    "tint": 13654602,
+    "dropTable": [
+      {
+        "itemId": "draught_swift",
+        "weight": 6
+      },
+      {
+        "itemId": "none",
+        "weight": 22
+      }
+    ],
+    "currencyDrop": 6
+  }
+]
