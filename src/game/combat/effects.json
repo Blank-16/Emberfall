@@ -1,0 +1,49 @@
+{
+  "bleed": {
+    "magnitude": 3,
+    "durationMs": 2500,
+    "tickMs": 500
+  },
+  "ignite": {
+    "magnitude": 5,
+    "durationMs": 2000,
+    "tickMs": 400,
+    "burstTint": 16747068,
+    "burstCount": 4
+  },
+  "armor_break": {
+    "magnitude": 0.3,
+    "durationMs": 4000
+  },
+  "stagger": {
+    "magnitude": 0.55,
+    "durationMs": 900
+  },
+  "frost_slow": {
+    "magnitude": 0.45,
+    "durationMs": 1800,
+    "burstTint": 8378623,
+    "burstCount": 3
+  },
+  "chain_lightning": {
+    "radius": 72,
+    "maxChainTargets": 2,
+    "damage": 9,
+    "knockback": 40,
+    "burstTint": 13232383,
+    "burstCount": 3
+  },
+  "ground_slam": {
+    "radius": 48,
+    "damage": 8,
+    "knockback": 140,
+    "slowMagnitude": 0.5,
+    "slowDurationMs": 700,
+    "burstTint": 14197322,
+    "burstCount": 6
+  },
+  "pierce_line": {
+    "magnitude": 0.15,
+    "durationMs": 2500
+  }
+}
