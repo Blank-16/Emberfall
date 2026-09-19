@@ -1,8 +1,11 @@
-import type { Rng } from '../core/Rng';
-import type { WeightedEntry } from '../core/types';
+import type { Rng } from "../core/Rng";
+import type { WeightedEntry } from "../core/types";
 
 /** Weighted pick with an O(n) scan; tables are small enough that prebuilt aliases are not worth it. */
-export function rollLoot(table: ReadonlyArray<WeightedEntry>, rng: Rng): string | null {
+export function rollLoot(
+  table: ReadonlyArray<WeightedEntry>,
+  rng: Rng,
+): string | null {
   if (table.length === 0) return null;
 
   let total = 0;

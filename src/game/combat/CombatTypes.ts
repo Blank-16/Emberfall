@@ -1,6 +1,6 @@
-import type Phaser from 'phaser';
-import type { Entity } from '../entities/Entity';
-import type { Faction } from '../core/types';
+import type Phaser from "phaser";
+import type { Entity } from "../entities/Entity";
+import type { Faction } from "../core/types";
 
 export interface HitboxSpec {
   readonly x: number;

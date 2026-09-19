@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
 export const TILE_SIZE = 16;
 export const VIEWPORT_TILES_X = 30;
@@ -61,7 +61,9 @@ export const DEPTH = {
   damageText: 60,
 } as const;
 
-export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameConfig {
+export function createGameConfig(
+  parent: HTMLElement,
+): Phaser.Types.Core.GameConfig {
   return {
     type: Phaser.AUTO,
     parent,
@@ -70,11 +72,16 @@ export function createGameConfig(parent: HTMLElement): Phaser.Types.Core.GameCon
     zoom: RENDER.zoom,
     pixelArt: true,
     roundPixels: true,
-    backgroundColor: '#0d0a12',
+    backgroundColor: "#0d0a12",
     fps: { target: 60, forceSetTimeOut: false },
     physics: {
-      default: 'arcade',
-      arcade: { gravity: { x: 0, y: 0 }, fps: 60, fixedStep: true, debug: false },
+      default: "arcade",
+      arcade: {
+        gravity: { x: 0, y: 0 },
+        fps: 60,
+        fixedStep: true,
+        debug: false,
+      },
     },
     scale: {
       mode: Phaser.Scale.FIT,

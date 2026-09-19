@@ -1,4 +1,5 @@
-export type StatusKind = 'dot' | 'slow' | 'speed' | 'damage' | 'armor_break' | 'stagger';
+export type StatusKind =
+  "dot" | "slow" | "speed" | "damage" | "armor_break" | "stagger";
 
 export interface StatusEffect {
   readonly id: string;
@@ -37,14 +38,15 @@ export class StatusComponent {
   }
 
   has(kind: StatusKind): boolean {
-    for (const status of this.active.values()) if (status.kind === kind) return true;
+    for (const status of this.active.values())
+      if (status.kind === kind) return true;
     return false;
   }
 
   update(nowMs: number): void {
     if (this.active.size === 0) return;
     for (const [id, status] of this.active) {
-      if (status.kind === 'dot' && nowMs >= status.nextTickAtMs) {
+      if (status.kind === "dot" && nowMs >= status.nextTickAtMs) {
         this.onDotTick(status.magnitude);
         status.nextTickAtMs = nowMs + (status.tickMs ?? 500);
       }
@@ -55,22 +57,24 @@ export class StatusComponent {
   get speedMultiplier(): number {
     let multiplier = 1;
     for (const status of this.active.values()) {
-      if (status.kind === 'slow') multiplier -= status.magnitude;
-      else if (status.kind === 'speed') multiplier += status.magnitude;
+      if (status.kind === "slow") multiplier -= status.magnitude;
+      else if (status.kind === "speed") multiplier += status.magnitude;
     }
     return Math.max(0.15, multiplier);
   }
 
   get damageMultiplier(): number {
     let multiplier = 1;
-    for (const status of this.active.values()) if (status.kind === 'damage') multiplier += status.magnitude;
+    for (const status of this.active.values())
+      if (status.kind === "damage") multiplier += status.magnitude;
     return multiplier;
   }
 
   /** Armor break raises incoming damage taken. */
   get incomingMultiplier(): number {
     let multiplier = 1;
-    for (const status of this.active.values()) if (status.kind === 'armor_break') multiplier += status.magnitude;
+    for (const status of this.active.values())
+      if (status.kind === "armor_break") multiplier += status.magnitude;
     return multiplier;
   }
 }

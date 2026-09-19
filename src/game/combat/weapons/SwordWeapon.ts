@@ -1,8 +1,8 @@
-import type Phaser from 'phaser';
-import { Weapon } from '../Weapon';
-import type { AttackContext } from '../CombatTypes';
-import { TextureKeys } from '../../core/TextureFactory';
-import type { WeaponStats } from '../../core/types';
+import type Phaser from "phaser";
+import { Weapon } from "../Weapon";
+import type { AttackContext } from "../CombatTypes";
+import { TextureKeys } from "../../core/TextureFactory";
+import type { WeaponStats } from "../../core/types";
 
 /** Fast three-hit chain. The finisher widens the arc and adds knockback. */
 export class SwordWeapon extends Weapon {

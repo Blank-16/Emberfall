@@ -1,14 +1,14 @@
-import Phaser from 'phaser';
-import { DEPTH } from '../core/GameConfig';
-import type { Entity } from '../entities/Entity';
-import type { Faction } from '../core/types';
-import type { HitboxSpec, ProjectileSpec } from './CombatTypes';
+import Phaser from "phaser";
+import { DEPTH } from "../core/GameConfig";
+import type { Entity } from "../entities/Entity";
+import type { Faction } from "../core/types";
+import type { HitboxSpec, ProjectileSpec } from "./CombatTypes";
 
 export class Hitbox extends Phaser.Physics.Arcade.Sprite {
-  faction: Faction = 'player';
+  faction: Faction = "player";
   damage = 0;
   knockback = 0;
-  abilityEffectId = 'none';
+  abilityEffectId = "none";
   owner: Entity | null = null;
   maxTargets = 1;
   expiresAtMs = 0;
@@ -18,7 +18,7 @@ export class Hitbox extends Phaser.Physics.Arcade.Sprite {
   readonly hitTargets = new Set<string>();
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y, '');
+    super(scene, x, y, "");
     scene.physics.add.existing(this);
     this.setDepth(DEPTH.vfx);
     this.setActive(false).setVisible(false);
@@ -71,10 +71,10 @@ export class Hitbox extends Phaser.Physics.Arcade.Sprite {
 }
 
 export class Projectile extends Phaser.Physics.Arcade.Sprite {
-  faction: Faction = 'player';
+  faction: Faction = "player";
   damage = 0;
   knockback = 0;
-  abilityEffectId = 'none';
+  abilityEffectId = "none";
   owner: Entity | null = null;
   piercing = false;
   expiresAtMs = 0;

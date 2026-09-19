@@ -1,14 +1,21 @@
-import Phaser from 'phaser';
-import { Entity } from './Entity';
-import { DEPTH } from '../core/GameConfig';
-import { EventBus } from '../core/EventBus';
-import { TextureKeys } from '../core/TextureFactory';
-import type { CombatSystem } from '../combat/CombatSystem';
-import type { EnemyDefinition } from '../core/types';
-import { getEnemyStates, StateMachine, type EnemyContext, type EnemyState } from '../ai/EnemyStateMachine';
-import type { Player } from './Player';
+import Phaser from "phaser";
+import { Entity } from "./Entity";
+import { DEPTH } from "../core/GameConfig";
+import { EventBus } from "../core/EventBus";
+import { TextureKeys } from "../core/TextureFactory";
+import type { CombatSystem } from "../combat/CombatSystem";
+import type { EnemyDefinition } from "../core/types";
+import {
+  getEnemyStates,
+  StateMachine,
+  type EnemyContext,
+  type EnemyState,
+} from "../ai/EnemyStateMachine";
+import type { Player } from "./Player";
 
-const TEXTURE_BY_BEHAVIOR: Readonly<Record<EnemyDefinition['behavior'], string>> = {
+const TEXTURE_BY_BEHAVIOR: Readonly<
+  Record<EnemyDefinition["behavior"], string>
+> = {
   melee_chaser: TextureKeys.enemy,
   ranged_kiter: TextureKeys.enemyRanged,
   stationary_turret: TextureKeys.enemyTurret,
@@ -39,7 +46,7 @@ export class Enemy extends Entity implements EnemyContext {
       x,
       y,
       texture: texture ?? TEXTURE_BY_BEHAVIOR[definition.behavior],
-      faction: 'enemy',
+      faction: "enemy",
       maxHealth: definition.health,
       bodyRadius: definition.bodyRadius,
       tint: definition.tint,
@@ -55,7 +62,11 @@ export class Enemy extends Entity implements EnemyContext {
     });
 
     this.definition = definition;
-    this.machine = new StateMachine<EnemyContext, EnemyState>(this, getEnemyStates(definition.behavior), 'idle');
+    this.machine = new StateMachine<EnemyContext, EnemyState>(
+      this,
+      getEnemyStates(definition.behavior),
+      "idle",
+    );
     this.strafeSign = Math.random() < 0.5 ? -1 : 1;
     this.wallSlideSign = this.strafeSign;
   }
@@ -78,7 +89,12 @@ export class Enemy extends Entity implements EnemyContext {
 
   distanceToTarget(): number {
     if (!this.target) return Number.POSITIVE_INFINITY;
-    return Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y);
+    return Phaser.Math.Distance.Between(
+      this.x,
+      this.y,
+      this.target.x,
+      this.target.y,
+    );
   }
 
   hasLineOfSight(): boolean {
@@ -87,19 +103,31 @@ export class Enemy extends Entity implements EnemyContext {
 
   private direction(): Phaser.Math.Vector2 {
     if (!this.target) return this.toTarget.set(0, 0);
-    return this.toTarget.set(this.target.x - this.x, this.target.y - this.y).normalize();
+    return this.toTarget
+      .set(this.target.x - this.x, this.target.y - this.y)
+      .normalize();
   }
 
   moveToward(speedMultiplier: number, nowMs: number): void {
     const dir = this.steerAroundWalls(this.direction());
-    this.movement.moveDirect(dir.x, dir.y, this.effectiveSpeed(speedMultiplier), nowMs);
+    this.movement.moveDirect(
+      dir.x,
+      dir.y,
+      this.effectiveSpeed(speedMultiplier),
+      nowMs,
+    );
   }
 
   moveAway(speedMultiplier: number, nowMs: number): void {
     const dir = this.direction();
     const away = this.awayScratch.set(-dir.x, -dir.y);
     const steered = this.steerAroundWalls(away);
-    this.movement.moveDirect(steered.x, steered.y, this.effectiveSpeed(speedMultiplier), nowMs);
+    this.movement.moveDirect(
+      steered.x,
+      steered.y,
+      this.effectiveSpeed(speedMultiplier),
+      nowMs,
+    );
   }
 
   /**
@@ -112,7 +140,8 @@ export class Enemy extends Entity implements EnemyContext {
    */
   private steerAroundWalls(dir: Phaser.Math.Vector2): Phaser.Math.Vector2 {
     const blocked = this.arcadeBody.blocked;
-    const blockedX = (dir.x < 0 && blocked.left) || (dir.x > 0 && blocked.right);
+    const blockedX =
+      (dir.x < 0 && blocked.left) || (dir.x > 0 && blocked.right);
     const blockedY = (dir.y < 0 && blocked.up) || (dir.y > 0 && blocked.down);
     if (!blockedX && !blockedY) return dir;
 
@@ -122,13 +151,19 @@ export class Enemy extends Entity implements EnemyContext {
     const perpY = dir.x * this.wallSlideSign;
 
     this.steerScratch.set(openX + perpX * 0.8, openY + perpY * 0.8);
-    if (this.steerScratch.lengthSq() < 0.0001) this.steerScratch.set(perpX, perpY);
+    if (this.steerScratch.lengthSq() < 0.0001)
+      this.steerScratch.set(perpX, perpY);
     return this.steerScratch.normalize();
   }
 
   strafe(speedMultiplier: number, nowMs: number): void {
     const dir = this.direction();
-    this.movement.moveDirect(-dir.y * this.strafeSign, dir.x * this.strafeSign, this.effectiveSpeed(speedMultiplier), nowMs);
+    this.movement.moveDirect(
+      -dir.y * this.strafeSign,
+      dir.x * this.strafeSign,
+      this.effectiveSpeed(speedMultiplier),
+      nowMs,
+    );
   }
 
   faceTarget(): void {
@@ -152,7 +187,11 @@ export class Enemy extends Entity implements EnemyContext {
       .setVisible(false);
 
     const scale = (this.definition.attackRange * 2) / 64;
-    this.telegraph.setPosition(this.x, this.y).setScale(scale).setAlpha(0.15).setVisible(true);
+    this.telegraph
+      .setPosition(this.x, this.y)
+      .setScale(scale)
+      .setAlpha(0.15)
+      .setVisible(true);
     this.telegraph.setTint(0xff6b6b);
     this.scene.tweens.add({
       targets: this.telegraph,
@@ -168,7 +207,7 @@ export class Enemy extends Entity implements EnemyContext {
     this.telegraph?.setVisible(false);
 
     const dir = this.direction();
-    if (this.definition.behavior === 'melee_chaser') {
+    if (this.definition.behavior === "melee_chaser") {
       this.combat.spawnHitbox({
         x: this.x,
         y: this.y,
@@ -180,8 +219,8 @@ export class Enemy extends Entity implements EnemyContext {
         durationMs: this.definition.attackActiveMs,
         damage: this.definition.damage,
         knockback: 130,
-        faction: 'enemy',
-        abilityEffectId: 'none',
+        faction: "enemy",
+        abilityEffectId: "none",
         owner: this,
         texture: TextureKeys.slash,
         tint: 0xff8080,
@@ -197,8 +236,8 @@ export class Enemy extends Entity implements EnemyContext {
         speed: this.definition.projectileSpeed ?? 150,
         damage: this.definition.damage,
         knockback: 90,
-        faction: 'enemy',
-        abilityEffectId: 'none',
+        faction: "enemy",
+        abilityEffectId: "none",
         owner: this,
         lifetimeMs: 2200,
         tint: 0xff9a5c,
@@ -217,7 +256,11 @@ export class Enemy extends Entity implements EnemyContext {
     this.telegraph?.destroy();
     this.telegraph = null;
     this.combat.spawnBurst(this.x, this.y, this.definition.tint, 10);
-    EventBus.emit('enemy:died', { enemyId: this.definition.id, x: this.x, y: this.y });
+    EventBus.emit("enemy:died", {
+      enemyId: this.definition.id,
+      x: this.x,
+      y: this.y,
+    });
 
     this.scene.tweens.add({
       targets: this,

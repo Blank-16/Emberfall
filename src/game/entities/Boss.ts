@@ -1,12 +1,12 @@
-import Phaser from 'phaser';
-import { Enemy } from './Enemy';
-import { DEPTH } from '../core/GameConfig';
-import { EventBus } from '../core/EventBus';
-import { TextureKeys } from '../core/TextureFactory';
-import { BossController, type BossActions } from '../ai/BossController';
-import type { CombatSystem } from '../combat/CombatSystem';
-import type { BossAttackPattern, BossDefinition } from '../core/types';
-import type { Rng } from '../core/Rng';
+import Phaser from "phaser";
+import { Enemy } from "./Enemy";
+import { DEPTH } from "../core/GameConfig";
+import { EventBus } from "../core/EventBus";
+import { TextureKeys } from "../core/TextureFactory";
+import { BossController, type BossActions } from "../ai/BossController";
+import type { CombatSystem } from "../combat/CombatSystem";
+import type { BossAttackPattern, BossDefinition } from "../core/types";
+import type { Rng } from "../core/Rng";
 
 export type SummonHandler = (enemyId: string, x: number, y: number) => void;
 
@@ -30,7 +30,7 @@ export class Boss extends Enemy implements BossActions {
     this.controller = new BossController(definition, this, rng);
     this.setScale(definition.isMiniBoss ? 1 : 1.25);
 
-    EventBus.emit('boss:spawned', {
+    EventBus.emit("boss:spawned", {
       bossId: definition.id,
       displayName: definition.displayName,
       max: this.health.max,
@@ -38,7 +38,8 @@ export class Boss extends Enemy implements BossActions {
   }
 
   approachTarget(nowMs: number): void {
-    if (this.distanceToTarget() > this.definition.attackRange * 0.8) this.moveToward(1, nowMs);
+    if (this.distanceToTarget() > this.definition.attackRange * 0.8)
+      this.moveToward(1, nowMs);
     else this.halt();
     this.faceTarget();
   }
@@ -52,12 +53,16 @@ export class Boss extends Enemy implements BossActions {
     const scale = (pattern.radius * 2) / 64;
     this.telegraph
       .setPosition(this.x, this.y)
-      .setScale(pattern.kind === 'charge' ? 0.8 : scale)
-      .setTint(pattern.kind === 'charge' ? 0xffd166 : 0xff5c7a)
+      .setScale(pattern.kind === "charge" ? 0.8 : scale)
+      .setTint(pattern.kind === "charge" ? 0xffd166 : 0xff5c7a)
       .setAlpha(0.12)
       .setVisible(true);
 
-    this.scene.tweens.add({ targets: this.telegraph, alpha: 0.55, duration: pattern.telegraphMs });
+    this.scene.tweens.add({
+      targets: this.telegraph,
+      alpha: 0.55,
+      duration: pattern.telegraphMs,
+    });
   }
 
   hideTelegraph(): void {
@@ -66,20 +71,20 @@ export class Boss extends Enemy implements BossActions {
 
   performPattern(pattern: BossAttackPattern, nowMs: number): void {
     switch (pattern.kind) {
-      case 'radial_burst':
+      case "radial_burst":
         this.fireRadial(pattern);
         break;
-      case 'volley':
+      case "volley":
         this.lastVolleyAtMs = 0;
         this.fireVolley(pattern);
         break;
-      case 'slam':
+      case "slam":
         this.slam(pattern);
         break;
-      case 'charge':
+      case "charge":
         this.beginCharge(pattern, nowMs);
         break;
-      case 'summon':
+      case "summon":
         this.summonAdds(pattern);
         break;
       default:
@@ -87,8 +92,12 @@ export class Boss extends Enemy implements BossActions {
     }
   }
 
-  sustainPattern(pattern: BossAttackPattern, nowMs: number, elapsedMs: number): void {
-    if (pattern.kind === 'charge') {
+  sustainPattern(
+    pattern: BossAttackPattern,
+    nowMs: number,
+    elapsedMs: number,
+  ): void {
+    if (pattern.kind === "charge") {
       this.movement.moveDirect(
         this.chargeVector.x,
         this.chargeVector.y,
@@ -98,7 +107,7 @@ export class Boss extends Enemy implements BossActions {
       );
       return;
     }
-    if (pattern.kind === 'volley' && elapsedMs - this.lastVolleyAtMs > 260) {
+    if (pattern.kind === "volley" && elapsedMs - this.lastVolleyAtMs > 260) {
       this.lastVolleyAtMs = elapsedMs;
       this.fireVolley(pattern);
     }
@@ -116,8 +125,8 @@ export class Boss extends Enemy implements BossActions {
         speed: this.definition.projectileSpeed ?? 130,
         damage: pattern.damage,
         knockback: 110,
-        faction: 'enemy',
-        abilityEffectId: 'none',
+        faction: "enemy",
+        abilityEffectId: "none",
         owner: this,
         lifetimeMs: 2600,
         tint: 0xff7a5c,
@@ -146,8 +155,8 @@ export class Boss extends Enemy implements BossActions {
         speed: this.definition.projectileSpeed ?? 170,
         damage: pattern.damage,
         knockback: 90,
-        faction: 'enemy',
-        abilityEffectId: 'none',
+        faction: "enemy",
+        abilityEffectId: "none",
         owner: this,
         lifetimeMs: 2400,
         tint: 0xffc15c,
@@ -169,8 +178,8 @@ export class Boss extends Enemy implements BossActions {
       durationMs: pattern.activeMs,
       damage: pattern.damage,
       knockback: 260,
-      faction: 'enemy',
-      abilityEffectId: 'none',
+      faction: "enemy",
+      abilityEffectId: "none",
       owner: this,
       texture: TextureKeys.shockwave,
       tint: 0xff8a5c,
@@ -182,7 +191,8 @@ export class Boss extends Enemy implements BossActions {
 
   private beginCharge(pattern: BossAttackPattern, nowMs: number): void {
     const target = this.targetPosition();
-    if (target) this.chargeVector.set(target.x - this.x, target.y - this.y).normalize();
+    if (target)
+      this.chargeVector.set(target.x - this.x, target.y - this.y).normalize();
 
     this.combat.spawnHitbox({
       x: this.x,
@@ -195,13 +205,19 @@ export class Boss extends Enemy implements BossActions {
       durationMs: pattern.activeMs,
       damage: pattern.damage,
       knockback: 280,
-      faction: 'enemy',
-      abilityEffectId: 'none',
+      faction: "enemy",
+      abilityEffectId: "none",
       owner: this,
       followOwner: true,
       maxTargets: 1,
     });
-    this.movement.moveDirect(this.chargeVector.x, this.chargeVector.y, this.definition.moveSpeed * 3.2, nowMs, true);
+    this.movement.moveDirect(
+      this.chargeVector.x,
+      this.chargeVector.y,
+      this.definition.moveSpeed * 3.2,
+      nowMs,
+      true,
+    );
   }
 
   private summonAdds(pattern: BossAttackPattern): void {
@@ -210,7 +226,11 @@ export class Boss extends Enemy implements BossActions {
     const count = Math.max(1, pattern.projectileCount);
     for (let i = 0; i < count; i += 1) {
       const angle = (i / count) * Math.PI * 2;
-      this.onSummon(enemyId, this.x + Math.cos(angle) * pattern.radius, this.y + Math.sin(angle) * pattern.radius);
+      this.onSummon(
+        enemyId,
+        this.x + Math.cos(angle) * pattern.radius,
+        this.y + Math.sin(angle) * pattern.radius,
+      );
     }
   }
 
@@ -224,13 +244,13 @@ export class Boss extends Enemy implements BossActions {
   }
 
   protected override onHealthChanged(current: number, max: number): void {
-    EventBus.emit('boss:health-changed', { current, max });
+    EventBus.emit("boss:health-changed", { current, max });
   }
 
   protected override onDeath(): void {
     this.controller.reset();
     super.onDeath();
     this.scene.cameras.main.shake(420, 0.01);
-    EventBus.emit('boss:defeated', { bossId: this.bossDefinition.id });
+    EventBus.emit("boss:defeated", { bossId: this.bossDefinition.id });
   }
 }

@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
 export interface MovementConfig {
   readonly moveSpeed: number;
@@ -46,7 +46,12 @@ export class MovementComponent {
   }
 
   /** inputX/inputY are raw axis values; diagonals are normalized so they are not faster. */
-  move(inputX: number, inputY: number, speedMultiplier: number, nowMs: number): void {
+  move(
+    inputX: number,
+    inputY: number,
+    speedMultiplier: number,
+    nowMs: number,
+  ): void {
     if (this.isDashing(nowMs) || this.isKnockedBack(nowMs)) return;
 
     const lengthSq = inputX * inputX + inputY * inputY;
@@ -62,13 +67,26 @@ export class MovementComponent {
 
     const maxSpeed = this.config.moveSpeed * speedMultiplier;
     this.body.setMaxVelocity(maxSpeed, maxSpeed);
-    this.body.setAcceleration(dirX * this.config.acceleration, dirY * this.config.acceleration);
+    this.body.setAcceleration(
+      dirX * this.config.acceleration,
+      dirY * this.config.acceleration,
+    );
   }
 
   /** Direct velocity set for AI that does not need acceleration smoothing. ignoreKnockback lets a
    *  committed movement (a boss charge) push through a stray hit instead of stuttering to a halt. */
-  moveDirect(dirX: number, dirY: number, speed: number, nowMs: number, ignoreKnockback = false): void {
-    if (this.isDashing(nowMs) || (!ignoreKnockback && this.isKnockedBack(nowMs))) return;
+  moveDirect(
+    dirX: number,
+    dirY: number,
+    speed: number,
+    nowMs: number,
+    ignoreKnockback = false,
+  ): void {
+    if (
+      this.isDashing(nowMs) ||
+      (!ignoreKnockback && this.isKnockedBack(nowMs))
+    )
+      return;
     const lengthSq = dirX * dirX + dirY * dirY;
     if (lengthSq < 0.0001) {
       this.body.setVelocity(0, 0);
@@ -99,13 +117,22 @@ export class MovementComponent {
 
     this.body.setMaxVelocity(this.config.dashSpeed, this.config.dashSpeed);
     this.body.setAcceleration(0, 0);
-    this.body.setVelocity(this.facing.x * this.config.dashSpeed, this.facing.y * this.config.dashSpeed);
+    this.body.setVelocity(
+      this.facing.x * this.config.dashSpeed,
+      this.facing.y * this.config.dashSpeed,
+    );
     this.dashEndsAtMs = nowMs + this.config.dashDurationMs;
     this.dashReadyAtMs = nowMs + this.config.dashCooldownMs;
     return true;
   }
 
-  applyKnockback(fromX: number, fromY: number, force: number, nowMs: number, durationMs = 140): void {
+  applyKnockback(
+    fromX: number,
+    fromY: number,
+    force: number,
+    nowMs: number,
+    durationMs = 140,
+  ): void {
     if (force <= 0) return;
     const dx = this.body.center.x - fromX;
     const dy = this.body.center.y - fromY;

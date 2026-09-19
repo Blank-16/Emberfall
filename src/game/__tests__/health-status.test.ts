@@ -1,15 +1,20 @@
-import { describe, expect, it } from 'vitest';
-import { HealthComponent } from '../entities/components/HealthComponent';
-import { StatusComponent } from '../entities/components/StatusComponent';
+import { describe, expect, it } from "vitest";
+import { HealthComponent } from "../entities/components/HealthComponent";
+import { StatusComponent } from "../entities/components/StatusComponent";
 
-describe('HealthComponent', () => {
-  it('absorbs damage with shield before health, and grants invulnerability for the next hit', () => {
+describe("HealthComponent", () => {
+  it("absorbs damage with shield before health, and grants invulnerability for the next hit", () => {
     let deaths = 0;
     const hp = new HealthComponent(100, undefined, () => (deaths += 1));
     hp.addShield(20);
 
     const first = hp.damage(30, 1000, 0);
-    expect(first).toEqual({ applied: 10, absorbed: 20, blocked: false, died: false });
+    expect(first).toEqual({
+      applied: 10,
+      absorbed: 20,
+      blocked: false,
+      died: false,
+    });
     expect(hp.current).toBe(90);
 
     // This hit lands (nothing granted invuln yet) and itself grants 500ms of invulnerability.
@@ -32,7 +37,7 @@ describe('HealthComponent', () => {
     expect(hp.isDead).toBe(true);
   });
 
-  it('heals up to max and never past it', () => {
+  it("heals up to max and never past it", () => {
     const hp = new HealthComponent(100);
     hp.damage(40, 0, 0);
     const healed = hp.heal(1000);
@@ -41,11 +46,14 @@ describe('HealthComponent', () => {
   });
 });
 
-describe('StatusComponent', () => {
-  it('ticks a dot on schedule, including exactly at its expiry boundary, then stops', () => {
+describe("StatusComponent", () => {
+  it("ticks a dot on schedule, including exactly at its expiry boundary, then stops", () => {
     let dotDamage = 0;
     const status = new StatusComponent((dmg) => (dotDamage += dmg));
-    status.apply({ id: 'bleed', kind: 'dot', magnitude: 5, durationMs: 1000, tickMs: 500 }, 0);
+    status.apply(
+      { id: "bleed", kind: "dot", magnitude: 5, durationMs: 1000, tickMs: 500 },
+      0,
+    );
 
     status.update(400);
     expect(dotDamage).toBe(0);
@@ -61,18 +69,27 @@ describe('StatusComponent', () => {
     expect(dotDamage).toBe(10);
   });
 
-  it('combines slow and speed multipliers additively, floored at 0.15', () => {
+  it("combines slow and speed multipliers additively, floored at 0.15", () => {
     const status = new StatusComponent(() => undefined);
-    status.apply({ id: 'slow', kind: 'slow', magnitude: 0.4, durationMs: 500 }, 0);
+    status.apply(
+      { id: "slow", kind: "slow", magnitude: 0.4, durationMs: 500 },
+      0,
+    );
     expect(status.speedMultiplier).toBeCloseTo(0.6);
 
-    status.apply({ id: 'haste', kind: 'speed', magnitude: 0.3, durationMs: 500 }, 0);
+    status.apply(
+      { id: "haste", kind: "speed", magnitude: 0.3, durationMs: 500 },
+      0,
+    );
     expect(status.speedMultiplier).toBeCloseTo(0.9);
   });
 
-  it('expires effects and removes their contribution', () => {
+  it("expires effects and removes their contribution", () => {
     const status = new StatusComponent(() => undefined);
-    status.apply({ id: 'slow', kind: 'slow', magnitude: 0.5, durationMs: 100 }, 0);
+    status.apply(
+      { id: "slow", kind: "slow", magnitude: 0.5, durationMs: 100 },
+      0,
+    );
     expect(status.speedMultiplier).toBeCloseTo(0.5);
     status.update(150);
     expect(status.speedMultiplier).toBe(1);

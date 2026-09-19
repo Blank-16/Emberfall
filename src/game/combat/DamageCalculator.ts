@@ -1,5 +1,5 @@
-import type { Rng } from '../core/Rng';
-import { TUNING } from '../core/GameConfig';
+import type { Rng } from "../core/Rng";
+import { TUNING } from "../core/GameConfig";
 
 export interface DamageRoll {
   readonly amount: number;
@@ -24,7 +24,11 @@ export const DamageCalculator = {
 
     const jitter = 1 + rng.range(-variance, variance);
     const critical = rng.chance(critChance);
-    const raw = input.baseDamage * input.attackerMultiplier * jitter * (critical ? critMultiplier : 1);
+    const raw =
+      input.baseDamage *
+      input.attackerMultiplier *
+      jitter *
+      (critical ? critMultiplier : 1);
     return { amount: Math.max(1, Math.round(raw)), critical };
   },
 };

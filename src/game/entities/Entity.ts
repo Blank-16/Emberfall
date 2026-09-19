@@ -1,9 +1,12 @@
-import Phaser from 'phaser';
-import { DEPTH, TUNING } from '../core/GameConfig';
-import type { Faction } from '../core/types';
-import { HealthComponent } from './components/HealthComponent';
-import { StatusComponent } from './components/StatusComponent';
-import { MovementComponent, type MovementConfig } from './components/MovementComponent';
+import Phaser from "phaser";
+import { DEPTH, TUNING } from "../core/GameConfig";
+import type { Faction } from "../core/types";
+import { HealthComponent } from "./components/HealthComponent";
+import { StatusComponent } from "./components/StatusComponent";
+import {
+  MovementComponent,
+  type MovementConfig,
+} from "./components/MovementComponent";
 
 export interface EntityOptions {
   readonly scene: Phaser.Scene;
@@ -50,7 +53,11 @@ export abstract class Entity extends Phaser.Physics.Arcade.Sprite {
     this.setTint(this.baseTint);
 
     const body = this.body as Phaser.Physics.Arcade.Body;
-    body.setCircle(options.bodyRadius, this.width / 2 - options.bodyRadius, this.height / 2 - options.bodyRadius);
+    body.setCircle(
+      options.bodyRadius,
+      this.width / 2 - options.bodyRadius,
+      this.height / 2 - options.bodyRadius,
+    );
     body.setCollideWorldBounds(false);
 
     this.health = new HealthComponent(
@@ -72,10 +79,18 @@ export abstract class Entity extends Phaser.Physics.Arcade.Sprite {
     return this.body as Phaser.Physics.Arcade.Body;
   }
 
-  takeDamage(amount: number, nowMs: number, options: DamageOptions = {}): number {
+  takeDamage(
+    amount: number,
+    nowMs: number,
+    options: DamageOptions = {},
+  ): number {
     if (this.dead) return 0;
     const scaled = amount * this.status.incomingMultiplier;
-    const result = this.health.damage(scaled, nowMs, options.invulnerabilityMs ?? 0);
+    const result = this.health.damage(
+      scaled,
+      nowMs,
+      options.invulnerabilityMs ?? 0,
+    );
     if (result.blocked) return 0;
 
     this.playHitFlash();

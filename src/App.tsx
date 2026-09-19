@@ -1,5 +1,5 @@
-import { PhaserGame } from '@ui/components/PhaserGame';
-import { HUD } from '@ui/components/HUD';
+import { PhaserGame } from "@ui/components/PhaserGame";
+import { HUD } from "@ui/components/HUD";
 
 export default function App(): JSX.Element {
   return (

@@ -16,7 +16,8 @@ export class ObjectPool<T extends Poolable> {
   }
 
   acquire(): T | null {
-    const item = this.free.pop() ?? (this.size < this.maxSize ? this.factory() : null);
+    const item =
+      this.free.pop() ?? (this.size < this.maxSize ? this.factory() : null);
     if (item) this.live.add(item);
     return item;
   }

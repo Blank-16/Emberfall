@@ -1,5 +1,5 @@
-import Phaser from 'phaser';
-import { SceneKeys } from '../core/SceneKeys';
+import Phaser from "phaser";
+import { SceneKeys } from "../core/SceneKeys";
 
 export class BootScene extends Phaser.Scene {
   constructor() {

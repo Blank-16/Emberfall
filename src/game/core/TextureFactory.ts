@@ -1,30 +1,30 @@
-import Phaser from 'phaser';
-import { TILE_SIZE } from './GameConfig';
-import type { DungeonPalette } from './types';
+import Phaser from "phaser";
+import { TILE_SIZE } from "./GameConfig";
+import type { DungeonPalette } from "./types";
 
 export const TextureKeys = {
-  player: 'tex:player',
-  enemy: 'tex:enemy',
-  enemyRanged: 'tex:enemy-ranged',
-  enemyTurret: 'tex:enemy-turret',
-  boss: 'tex:boss',
-  projectile: 'tex:projectile',
-  slash: 'tex:slash',
-  thrust: 'tex:thrust',
-  shockwave: 'tex:shockwave',
-  pickup: 'tex:pickup',
-  coin: 'tex:coin',
-  chest: 'tex:chest',
-  chestOpen: 'tex:chest-open',
-  lever: 'tex:lever',
-  leverOn: 'tex:lever-on',
-  door: 'tex:door',
-  spike: 'tex:spike',
-  spikeUp: 'tex:spike-up',
-  fire: 'tex:fire',
-  shadow: 'tex:shadow',
-  particle: 'tex:particle',
-  telegraph: 'tex:telegraph',
+  player: "tex:player",
+  enemy: "tex:enemy",
+  enemyRanged: "tex:enemy-ranged",
+  enemyTurret: "tex:enemy-turret",
+  boss: "tex:boss",
+  projectile: "tex:projectile",
+  slash: "tex:slash",
+  thrust: "tex:thrust",
+  shockwave: "tex:shockwave",
+  pickup: "tex:pickup",
+  coin: "tex:coin",
+  chest: "tex:chest",
+  chestOpen: "tex:chest-open",
+  lever: "tex:lever",
+  leverOn: "tex:lever-on",
+  door: "tex:door",
+  spike: "tex:spike",
+  spikeUp: "tex:spike-up",
+  fire: "tex:fire",
+  shadow: "tex:shadow",
+  particle: "tex:particle",
+  telegraph: "tex:telegraph",
 } as const;
 
 export function tilesetKeyFor(dungeonId: string): string {
@@ -33,7 +33,13 @@ export function tilesetKeyFor(dungeonId: string): string {
 
 type G = Phaser.GameObjects.Graphics;
 
-function withGraphics(scene: Phaser.Scene, key: string, w: number, h: number, draw: (g: G) => void): void {
+function withGraphics(
+  scene: Phaser.Scene,
+  key: string,
+  w: number,
+  h: number,
+  draw: (g: G) => void,
+): void {
   if (scene.textures.exists(key)) return;
   const g = scene.make.graphics({ x: 0, y: 0 }, false);
   draw(g);
@@ -58,11 +64,20 @@ export const TileIndex = {
 
 const TILE_COUNT = 8;
 
-export function generateTileset(scene: Phaser.Scene, dungeonId: string, palette: DungeonPalette): string {
+export function generateTileset(
+  scene: Phaser.Scene,
+  dungeonId: string,
+  palette: DungeonPalette,
+): string {
   const key = tilesetKeyFor(dungeonId);
   withGraphics(scene, key, TILE_SIZE * TILE_COUNT, TILE_SIZE, (g) => {
     const cell = (index: number): number => (index - 1) * TILE_SIZE;
-    const speckle = (x: number, color: number, count: number, seed: number): void => {
+    const speckle = (
+      x: number,
+      color: number,
+      count: number,
+      seed: number,
+    ): void => {
       g.fillStyle(color, 1);
       for (let i = 0; i < count; i += 1) {
         const px = x + ((seed * (i + 3) * 7) % TILE_SIZE);
@@ -95,7 +110,12 @@ export function generateTileset(scene: Phaser.Scene, dungeonId: string, palette:
     g.fillStyle(palette.floor, 1);
     g.fillRect(cell(TileIndex.spikeBase), 0, TILE_SIZE, TILE_SIZE);
     g.lineStyle(1, 0x000000, 0.5);
-    g.strokeRect(cell(TileIndex.spikeBase) + 2, 2, TILE_SIZE - 4, TILE_SIZE - 4);
+    g.strokeRect(
+      cell(TileIndex.spikeBase) + 2,
+      2,
+      TILE_SIZE - 4,
+      TILE_SIZE - 4,
+    );
 
     g.fillStyle(0x140f14, 1);
     g.fillRect(cell(TileIndex.scorched), 0, TILE_SIZE, TILE_SIZE);
@@ -125,8 +145,12 @@ function drawHumanoid(g: G, body: number, trim: number, size: number): void {
 }
 
 export function generateEntityTextures(scene: Phaser.Scene): void {
-  withGraphics(scene, TextureKeys.player, 16, 16, (g) => drawHumanoid(g, 0x4f7fd4, 0xe8d38a, 16));
-  withGraphics(scene, TextureKeys.enemy, 16, 16, (g) => drawHumanoid(g, 0xffffff, 0xd8d8d8, 16));
+  withGraphics(scene, TextureKeys.player, 16, 16, (g) =>
+    drawHumanoid(g, 0x4f7fd4, 0xe8d38a, 16),
+  );
+  withGraphics(scene, TextureKeys.enemy, 16, 16, (g) =>
+    drawHumanoid(g, 0xffffff, 0xd8d8d8, 16),
+  );
 
   withGraphics(scene, TextureKeys.enemyRanged, 16, 16, (g) => {
     g.fillStyle(0xffffff, 1);
@@ -166,7 +190,14 @@ export function generateEntityTextures(scene: Phaser.Scene): void {
   withGraphics(scene, TextureKeys.slash, 40, 40, (g) => {
     g.lineStyle(5, 0xffffff, 0.9);
     g.beginPath();
-    g.arc(20, 20, 16, Phaser.Math.DegToRad(-55), Phaser.Math.DegToRad(55), false);
+    g.arc(
+      20,
+      20,
+      16,
+      Phaser.Math.DegToRad(-55),
+      Phaser.Math.DegToRad(55),
+      false,
+    );
     g.strokePath();
   });
 

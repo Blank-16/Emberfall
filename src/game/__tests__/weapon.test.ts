@@ -1,8 +1,12 @@
-import { describe, expect, it } from 'vitest';
-import { Weapon } from '../combat/Weapon';
-import { WeaponLoadout } from '../combat/WeaponLoadout';
-import type { AttackContext, HitboxSpec, ProjectileSpec } from '../combat/CombatTypes';
-import type { WeaponStats } from '../core/types';
+import { describe, expect, it } from "vitest";
+import { Weapon } from "../combat/Weapon";
+import { WeaponLoadout } from "../combat/WeaponLoadout";
+import type {
+  AttackContext,
+  HitboxSpec,
+  ProjectileSpec,
+} from "../combat/CombatTypes";
+import type { WeaponStats } from "../core/types";
 
 /** Records what it was asked to do instead of touching Phaser/textures, unlike the real weapon classes. */
 class TestMeleeWeapon extends Weapon {
@@ -22,9 +26,11 @@ class TestMeleeWeapon extends Weapon {
       height: this.stats.range,
       offset: 0,
       durationMs: this.stats.activeMs,
-      damage: this.stats.damage * (this.comboIndex === this.stats.comboLength - 1 ? 1.5 : 1),
+      damage:
+        this.stats.damage *
+        (this.comboIndex === this.stats.comboLength - 1 ? 1.5 : 1),
       knockback: this.stats.knockback,
-      faction: 'player',
+      faction: "player",
       abilityEffectId: this.stats.abilityEffectId,
       owner: null,
     };
@@ -33,7 +39,7 @@ class TestMeleeWeapon extends Weapon {
   }
 
   override getAnimationKey(): string {
-    return 'test-melee';
+    return "test-melee";
   }
 }
 
@@ -54,7 +60,7 @@ class TestRangedWeapon extends Weapon {
         speed: this.stats.projectileSpeed ?? 200,
         damage: this.stats.damage,
         knockback: this.stats.knockback,
-        faction: 'player',
+        faction: "player",
         abilityEffectId: this.stats.abilityEffectId,
         owner: null,
         lifetimeMs: 1000,
@@ -68,7 +74,7 @@ class TestRangedWeapon extends Weapon {
   }
 
   override getAnimationKey(): string {
-    return 'test-ranged';
+    return "test-ranged";
   }
 }
 
@@ -88,14 +94,14 @@ const DIRECTION = { x: 1, y: 0 } as never;
 
 function meleeStats(overrides: Partial<WeaponStats> = {}): WeaponStats {
   return {
-    id: 'test_sword',
-    displayName: 'Test Sword',
-    weaponClass: 'sword',
+    id: "test_sword",
+    displayName: "Test Sword",
+    weaponClass: "sword",
     damage: 10,
     attackSpeed: 10,
     range: 30,
     swapCancelWindowMs: 50,
-    abilityEffectId: 'none',
+    abilityEffectId: "none",
     knockback: 10,
     activeMs: 20,
     recoveryMs: 30,
@@ -105,15 +111,15 @@ function meleeStats(overrides: Partial<WeaponStats> = {}): WeaponStats {
   };
 }
 
-describe('Weapon', () => {
-  it('gates the next attack behind its cooldown', () => {
+describe("Weapon", () => {
+  it("gates the next attack behind its cooldown", () => {
     const sword = new TestMeleeWeapon(meleeStats());
     expect(sword.canAttack(0)).toBe(true);
     sword.attack(noopContext(0), ORIGIN, DIRECTION);
     expect(sword.canAttack(5)).toBe(false);
   });
 
-  it('cycles combo index and boosts the finisher hit', () => {
+  it("cycles combo index and boosts the finisher hit", () => {
     const sword = new TestMeleeWeapon(meleeStats());
     sword.attack(noopContext(0), ORIGIN, DIRECTION);
     sword.attack(noopContext(100), ORIGIN, DIRECTION);
@@ -122,26 +128,44 @@ describe('Weapon', () => {
     expect(sword.hits[2]!.damage).toBeGreaterThan(sword.hits[0]!.damage);
   });
 
-  it('cannot be cancelled by a swap during active-hit frames, but can during recovery', () => {
+  it("cannot be cancelled by a swap during active-hit frames, but can during recovery", () => {
     const sword = new TestMeleeWeapon(meleeStats());
     expect(sword.canBeCancelledBySwap(5)).toBe(false);
     expect(sword.canBeCancelledBySwap(60)).toBe(true);
   });
 
-  it('a ranged weapon fans comboLength out into that many projectiles per cast', () => {
+  it("a ranged weapon fans comboLength out into that many projectiles per cast", () => {
     const magic = new TestRangedWeapon(
-      meleeStats({ id: 'test_spell', weaponClass: 'magic', comboLength: 3, projectileSpeed: 250 }),
+      meleeStats({
+        id: "test_spell",
+        weaponClass: "magic",
+        comboLength: 3,
+        projectileSpeed: 250,
+      }),
     );
     magic.attack(noopContext(0), ORIGIN, DIRECTION);
     expect(magic.casts).toHaveLength(3);
   });
 });
 
-describe('WeaponLoadout', () => {
-  it('rejects a swap while the active weapon is mid-swing, allows it once in recovery', () => {
-    const primary = new TestMeleeWeapon(meleeStats({ id: 'loadout_sword', activeMs: 30, recoveryMs: 50, swapCancelWindowMs: 40 }));
+describe("WeaponLoadout", () => {
+  it("rejects a swap while the active weapon is mid-swing, allows it once in recovery", () => {
+    const primary = new TestMeleeWeapon(
+      meleeStats({
+        id: "loadout_sword",
+        activeMs: 30,
+        recoveryMs: 50,
+        swapCancelWindowMs: 40,
+      }),
+    );
     const secondary = new TestRangedWeapon(
-      meleeStats({ id: 'loadout_spell', weaponClass: 'magic', comboLength: 1, activeMs: 50, recoveryMs: 100 }),
+      meleeStats({
+        id: "loadout_spell",
+        weaponClass: "magic",
+        comboLength: 1,
+        activeMs: 50,
+        recoveryMs: 100,
+      }),
     );
     const loadout = new WeaponLoadout(primary, secondary);
 

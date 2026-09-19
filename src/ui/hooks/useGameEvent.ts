@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { EventBus, type GameEventMap } from '@game/core/EventBus';
+import { useEffect, useRef, useState } from "react";
+import { EventBus, type GameEventMap } from "@game/core/EventBus";
 
 /** Subscribes to one EventBus topic and re-renders with its latest payload. No polling. */
 export function useGameEvent<K extends keyof GameEventMap>(

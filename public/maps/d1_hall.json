@@ -1,1 +1,320 @@
-{"compressionlevel":-1,"width":30,"height":20,"tilewidth":16,"tileheight":16,"infinite":false,"orientation":"orthogonal","renderorder":"right-down","type":"map","version":"1.10","tiledversion":"1.10.2","nextlayerid":4,"nextobjectid":14,"layers":[{"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,0,1,1,1,1,0,2,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,2,0,1,1,1,1,0,0,1,1,1,1,0,2,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,2,0,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,0,2,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,2,0,1,1,1,1,0,0,1,1,1,1,0,2,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,2,0,1,1,1,1,0,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"height":20,"width":30,"id":1,"name":"ground","opacity":1,"type":"tilelayer","visible":true,"x":0,"y":0},{"data":[4,3,3,3,3,3,3,3,3,3,3,3,3,0,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,4,4,0,0,0,0,4,0,4,3,0,0,0,0,0,0,0,0,0,0,0,0,3,4,0,4,0,0,0,0,4,4,0,0,0,0,4,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,4,0,0,0,0,4,4,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,0,0,0,0,4,4,0,0,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,4,0,0,0,0,4,4,0,0,0,0,4,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,4,0,0,0,0,4,4,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"height":20,"width":30,"id":2,"name":"walls","opacity":1,"type":"tilelayer","visible":true,"x":0,"y":0},{"draworder":"topdown","id":3,"name":"objects","objects":[{"id":1,"name":"husk_thrall","type":"enemy","x":160,"y":144,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"id","type":"string","value":"husk_thrall"}]},{"id":2,"name":"husk_thrall","type":"enemy","x":304,"y":176,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"id","type":"string","value":"husk_thrall"}]},{"id":3,"name":"thorn_slinger","type":"enemy","x":112,"y":64,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"id","type":"string","value":"thorn_slinger"}]},{"id":4,"name":"thorn_slinger","type":"enemy","x":352,"y":240,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"id","type":"string","value":"thorn_slinger"}]},{"id":5,"name":"door_w","type":"door","x":0,"y":144,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"w"},{"name":"target","type":"string","value":"d1_entry"},{"name":"locked","type":"bool","value":false}]},{"id":6,"name":"door_w","type":"door","x":0,"y":160,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"w"},{"name":"target","type":"string","value":"d1_entry"},{"name":"locked","type":"bool","value":false}]},{"id":7,"name":"exit_w","type":"exit","x":0,"y":144,"width":16,"height":32,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"w"},{"name":"target","type":"string","value":"d1_entry"},{"name":"locked","type":"bool","value":false}]},{"id":8,"name":"door_n","type":"door","x":208,"y":0,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"n"},{"name":"target","type":"string","value":"d1_grove"},{"name":"locked","type":"bool","value":false}]},{"id":9,"name":"door_n","type":"door","x":224,"y":0,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"n"},{"name":"target","type":"string","value":"d1_grove"},{"name":"locked","type":"bool","value":false}]},{"id":10,"name":"exit_n","type":"exit","x":208,"y":0,"width":32,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"n"},{"name":"target","type":"string","value":"d1_grove"},{"name":"locked","type":"bool","value":false}]},{"id":11,"name":"door_e","type":"door","x":464,"y":144,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"e"},{"name":"target","type":"string","value":"d1_cistern"},{"name":"locked","type":"bool","value":true}]},{"id":12,"name":"door_e","type":"door","x":464,"y":160,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"e"},{"name":"target","type":"string","value":"d1_cistern"},{"name":"locked","type":"bool","value":true}]},{"id":13,"name":"exit_e","type":"exit","x":464,"y":144,"width":16,"height":32,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"e"},{"name":"target","type":"string","value":"d1_cistern"},{"name":"locked","type":"bool","value":true}]}],"opacity":1,"type":"objectgroup","visible":true,"x":0,"y":0}],"tilesets":[{"columns":8,"firstgid":1,"image":"runtime-generated","imageheight":16,"imagewidth":128,"margin":0,"name":"base","spacing":0,"tilecount":8,"tileheight":16,"tilewidth":16}]}
+{
+  "compressionlevel": -1,
+  "width": 30,
+  "height": 20,
+  "tilewidth": 16,
+  "tileheight": 16,
+  "infinite": false,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "type": "map",
+  "version": "1.10",
+  "tiledversion": "1.10.2",
+  "nextlayerid": 4,
+  "nextobjectid": 14,
+  "layers": [
+    {
+      "data": [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0,
+        0, 1, 1, 1, 1, 0, 2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2,
+        0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 0, 2, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 0, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 2, 0, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0,
+        2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 1, 1, 1, 0,
+        0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      ],
+      "height": 20,
+      "width": 30,
+      "id": 1,
+      "name": "ground",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "data": [
+        4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+        3, 3, 3, 3, 3, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 4, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 0,
+        4, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 3, 4, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 4,
+        0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 4, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        3, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+      ],
+      "height": 20,
+      "width": 30,
+      "id": 2,
+      "name": "walls",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "draworder": "topdown",
+      "id": 3,
+      "name": "objects",
+      "objects": [
+        {
+          "id": 1,
+          "name": "husk_thrall",
+          "type": "enemy",
+          "x": 160,
+          "y": 144,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "id", "type": "string", "value": "husk_thrall" }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "husk_thrall",
+          "type": "enemy",
+          "x": 304,
+          "y": 176,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "id", "type": "string", "value": "husk_thrall" }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "thorn_slinger",
+          "type": "enemy",
+          "x": 112,
+          "y": 64,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "id", "type": "string", "value": "thorn_slinger" }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "thorn_slinger",
+          "type": "enemy",
+          "x": 352,
+          "y": 240,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "id", "type": "string", "value": "thorn_slinger" }
+          ]
+        },
+        {
+          "id": 5,
+          "name": "door_w",
+          "type": "door",
+          "x": 0,
+          "y": 144,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "w" },
+            { "name": "target", "type": "string", "value": "d1_entry" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "door_w",
+          "type": "door",
+          "x": 0,
+          "y": 160,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "w" },
+            { "name": "target", "type": "string", "value": "d1_entry" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "exit_w",
+          "type": "exit",
+          "x": 0,
+          "y": 144,
+          "width": 16,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "w" },
+            { "name": "target", "type": "string", "value": "d1_entry" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "door_n",
+          "type": "door",
+          "x": 208,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "n" },
+            { "name": "target", "type": "string", "value": "d1_grove" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "door_n",
+          "type": "door",
+          "x": 224,
+          "y": 0,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "n" },
+            { "name": "target", "type": "string", "value": "d1_grove" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "exit_n",
+          "type": "exit",
+          "x": 208,
+          "y": 0,
+          "width": 32,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "n" },
+            { "name": "target", "type": "string", "value": "d1_grove" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "door_e",
+          "type": "door",
+          "x": 464,
+          "y": 144,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "e" },
+            { "name": "target", "type": "string", "value": "d1_cistern" },
+            { "name": "locked", "type": "bool", "value": true }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "door_e",
+          "type": "door",
+          "x": 464,
+          "y": 160,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "e" },
+            { "name": "target", "type": "string", "value": "d1_cistern" },
+            { "name": "locked", "type": "bool", "value": true }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "exit_e",
+          "type": "exit",
+          "x": 464,
+          "y": 144,
+          "width": 16,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "e" },
+            { "name": "target", "type": "string", "value": "d1_cistern" },
+            { "name": "locked", "type": "bool", "value": true }
+          ]
+        }
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "tilesets": [
+    {
+      "columns": 8,
+      "firstgid": 1,
+      "image": "runtime-generated",
+      "imageheight": 16,
+      "imagewidth": 128,
+      "margin": 0,
+      "name": "base",
+      "spacing": 0,
+      "tilecount": 8,
+      "tileheight": 16,
+      "tilewidth": 16
+    }
+  ]
+}

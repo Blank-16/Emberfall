@@ -43,19 +43,25 @@ export class HealthComponent {
   }
 
   grantInvulnerability(nowMs: number, durationMs: number): void {
-    this.invulnerableUntilMs = Math.max(this.invulnerableUntilMs, nowMs + durationMs);
+    this.invulnerableUntilMs = Math.max(
+      this.invulnerableUntilMs,
+      nowMs + durationMs,
+    );
   }
 
   damage(amount: number, nowMs: number, invulnerabilityMs = 0): DamageResult {
-    if (amount <= 0 || this.isDead) return { applied: 0, absorbed: 0, blocked: true, died: false };
-    if (this.isInvulnerable(nowMs)) return { applied: 0, absorbed: 0, blocked: true, died: false };
+    if (amount <= 0 || this.isDead)
+      return { applied: 0, absorbed: 0, blocked: true, died: false };
+    if (this.isInvulnerable(nowMs))
+      return { applied: 0, absorbed: 0, blocked: true, died: false };
 
     const absorbed = Math.min(this.shieldValue, amount);
     this.shieldValue -= absorbed;
     const applied = Math.min(this.currentValue, amount - absorbed);
     this.currentValue -= applied;
 
-    if (invulnerabilityMs > 0) this.grantInvulnerability(nowMs, invulnerabilityMs);
+    if (invulnerabilityMs > 0)
+      this.grantInvulnerability(nowMs, invulnerabilityMs);
     this.onChanged?.(this.currentValue, this.maxValue);
 
     const died = this.currentValue <= 0;

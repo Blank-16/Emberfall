@@ -1,7 +1,7 @@
-import { Inventory } from '../items/Inventory';
-import { WeaponLoadout } from '../combat/WeaponLoadout';
-import { createWeapon } from '../combat/weapons/WeaponFactory';
-import { GameData, DEFAULT_LOADOUT } from '../data/GameData';
+import { Inventory } from "../items/Inventory";
+import { WeaponLoadout } from "../combat/WeaponLoadout";
+import { createWeapon } from "../combat/weapons/WeaponFactory";
+import { GameData, DEFAULT_LOADOUT } from "../data/GameData";
 
 /**
  * Survives Hub <-> Dungeon scene swaps for the lifetime of the page. Phase 2 adds
@@ -29,8 +29,8 @@ class RunStateImpl {
 
   private createInventory(): Inventory {
     const inventory = new Inventory(GameData.potions);
-    inventory.addPotion('elixir_mend', 2);
-    inventory.addPotion('ward_stone', 1);
+    inventory.addPotion("elixir_mend", 2);
+    inventory.addPotion("ward_stone", 1);
     return inventory;
   }
 

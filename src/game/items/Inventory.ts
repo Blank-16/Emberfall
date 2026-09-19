@@ -1,5 +1,5 @@
-import { EventBus } from '../core/EventBus';
-import type { PotionDefinition } from '../core/types';
+import { EventBus } from "../core/EventBus";
+import type { PotionDefinition } from "../core/types";
 
 const MAX_STACK = 5;
 
@@ -8,7 +8,9 @@ export class Inventory {
   private currencyValue = 0;
   private selectedId: string | null = null;
 
-  constructor(private readonly potionDefinitions: ReadonlyMap<string, PotionDefinition>) {}
+  constructor(
+    private readonly potionDefinitions: ReadonlyMap<string, PotionDefinition>,
+  ) {}
 
   get currency(): number {
     return this.currencyValue;
@@ -21,13 +23,13 @@ export class Inventory {
   addCurrency(amount: number): void {
     if (amount <= 0) return;
     this.currencyValue += amount;
-    EventBus.emit('currency:changed', { total: this.currencyValue });
+    EventBus.emit("currency:changed", { total: this.currencyValue });
   }
 
   spendCurrency(amount: number): boolean {
     if (amount <= 0 || this.currencyValue < amount) return false;
     this.currencyValue -= amount;
-    EventBus.emit('currency:changed', { total: this.currencyValue });
+    EventBus.emit("currency:changed", { total: this.currencyValue });
     return true;
   }
 
@@ -84,7 +86,7 @@ export class Inventory {
   }
 
   emitChanged(): void {
-    EventBus.emit('inventory:changed', {
+    EventBus.emit("inventory:changed", {
       potions: [...this.counts.entries()].map(([id, count]) => ({
         id,
         displayName: this.potionDefinitions.get(id)?.displayName ?? id,
@@ -92,7 +94,7 @@ export class Inventory {
       })),
       selectedId: this.selectedId,
     });
-    EventBus.emit('currency:changed', { total: this.currencyValue });
+    EventBus.emit("currency:changed", { total: this.currencyValue });
   }
 
   private firstAvailable(): string | null {

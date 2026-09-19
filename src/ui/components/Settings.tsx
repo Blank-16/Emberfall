@@ -1,11 +1,15 @@
-import { useState } from 'react';
-import { GameBridge } from '@game/core/GameBridge';
+import { useState } from "react";
+import { GameBridge } from "@game/core/GameBridge";
 
-const CHANNELS = ['master', 'sfx', 'music'] as const;
+const CHANNELS = ["master", "sfx", "music"] as const;
 type Channel = (typeof CHANNELS)[number];
 
 export function Settings(): JSX.Element {
-  const [values, setValues] = useState<Record<Channel, number>>({ master: 0.8, sfx: 0.8, music: 0.6 });
+  const [values, setValues] = useState<Record<Channel, number>>({
+    master: 0.8,
+    sfx: 0.8,
+    music: 0.6,
+  });
 
   const update = (channel: Channel, value: number): void => {
     setValues((prev) => ({ ...prev, [channel]: value }));

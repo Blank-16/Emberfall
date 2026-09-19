@@ -1,5 +1,5 @@
-import type { PotionDefinition } from '../core/types';
-import type { Entity } from '../entities/Entity';
+import type { PotionDefinition } from "../core/types";
+import type { Entity } from "../entities/Entity";
 
 export interface PotionUseResult {
   readonly consumed: boolean;
@@ -7,30 +7,44 @@ export interface PotionUseResult {
 }
 
 /** Applies a consumable to a target. Heal is rejected at full health so a potion is never wasted. */
-export function applyPotion(potion: PotionDefinition, target: Entity, nowMs: number): PotionUseResult {
+export function applyPotion(
+  potion: PotionDefinition,
+  target: Entity,
+  nowMs: number,
+): PotionUseResult {
   switch (potion.kind) {
-    case 'heal': {
+    case "heal": {
       const healed = target.health.heal(potion.magnitude);
       return healed > 0
         ? { consumed: true, message: `Healed ${Math.round(healed)}` }
-        : { consumed: false, message: 'Already at full health' };
+        : { consumed: false, message: "Already at full health" };
     }
-    case 'speed':
+    case "speed":
       target.status.apply(
-        { id: 'potion-speed', kind: 'speed', magnitude: potion.magnitude, durationMs: potion.durationMs },
+        {
+          id: "potion-speed",
+          kind: "speed",
+          magnitude: potion.magnitude,
+          durationMs: potion.durationMs,
+        },
         nowMs,
       );
-      return { consumed: true, message: 'Quickened' };
-    case 'damage':
+      return { consumed: true, message: "Quickened" };
+    case "damage":
       target.status.apply(
-        { id: 'potion-damage', kind: 'damage', magnitude: potion.magnitude, durationMs: potion.durationMs },
+        {
+          id: "potion-damage",
+          kind: "damage",
+          magnitude: potion.magnitude,
+          durationMs: potion.durationMs,
+        },
         nowMs,
       );
-      return { consumed: true, message: 'Empowered' };
-    case 'shield':
+      return { consumed: true, message: "Empowered" };
+    case "shield":
       target.health.addShield(potion.magnitude);
-      return { consumed: true, message: 'Shielded' };
+      return { consumed: true, message: "Shielded" };
     default:
-      return { consumed: false, message: 'Nothing happened' };
+      return { consumed: false, message: "Nothing happened" };
   }
 }

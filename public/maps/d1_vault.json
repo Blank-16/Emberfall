@@ -1,1 +1,311 @@
-{"compressionlevel":-1,"width":30,"height":20,"tilewidth":16,"tileheight":16,"infinite":false,"orientation":"orthogonal","renderorder":"right-down","type":"map","version":"1.10","tiledversion":"1.10.2","nextlayerid":4,"nextobjectid":15,"layers":[{"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,2,0,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,6,6,6,6,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,6,6,6,6,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"height":20,"width":30,"id":1,"name":"ground","opacity":1,"type":"tilelayer","visible":true,"x":0,"y":0},{"data":[4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4,3,3,4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,4,3,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"height":20,"width":30,"id":2,"name":"walls","opacity":1,"type":"tilelayer","visible":true,"x":0,"y":0},{"draworder":"topdown","id":3,"name":"objects","objects":[{"id":1,"name":"hazard_spike","type":"hazard_spike","x":208,"y":176,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":852}]},{"id":2,"name":"hazard_spike","type":"hazard_spike","x":224,"y":176,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":989}]},{"id":3,"name":"hazard_spike","type":"hazard_spike","x":240,"y":176,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":1126}]},{"id":4,"name":"hazard_spike","type":"hazard_spike","x":256,"y":176,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":1263}]},{"id":5,"name":"hazard_spike","type":"hazard_spike","x":208,"y":192,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":913}]},{"id":6,"name":"hazard_spike","type":"hazard_spike","x":224,"y":192,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":1050}]},{"id":7,"name":"hazard_spike","type":"hazard_spike","x":240,"y":192,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":1187}]},{"id":8,"name":"hazard_spike","type":"hazard_spike","x":256,"y":192,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"phase","type":"int","value":1324}]},{"id":9,"name":"vault_hoard","type":"chest","x":240,"y":96,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"id","type":"string","value":"vault_hoard"},{"name":"lootTable","type":"string","value":"[{\"itemId\":\"blade_riverfang\",\"weight\":6},{\"itemId\":\"spear_windrake\",\"weight\":6},{\"itemId\":\"spell_frostlance\",\"weight\":6},{\"itemId\":\"ward_stone\",\"weight\":5}]"}]},{"id":10,"name":"thorn_slinger","type":"enemy","x":96,"y":128,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"id","type":"string","value":"thorn_slinger"}]},{"id":11,"name":"husk_thrall","type":"enemy","x":368,"y":192,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"id","type":"string","value":"husk_thrall"}]},{"id":12,"name":"door_w","type":"door","x":0,"y":128,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"w"},{"name":"target","type":"string","value":"d1_causeway"},{"name":"locked","type":"bool","value":false}]},{"id":13,"name":"door_w","type":"door","x":0,"y":144,"width":16,"height":16,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"w"},{"name":"target","type":"string","value":"d1_causeway"},{"name":"locked","type":"bool","value":false}]},{"id":14,"name":"exit_w","type":"exit","x":0,"y":128,"width":16,"height":32,"rotation":0,"visible":true,"properties":[{"name":"direction","type":"string","value":"w"},{"name":"target","type":"string","value":"d1_causeway"},{"name":"locked","type":"bool","value":false}]}],"opacity":1,"type":"objectgroup","visible":true,"x":0,"y":0}],"tilesets":[{"columns":8,"firstgid":1,"image":"runtime-generated","imageheight":16,"imagewidth":128,"margin":0,"name":"base","spacing":0,"tilecount":8,"tileheight":16,"tilewidth":16}]}
+{
+  "compressionlevel": -1,
+  "width": 30,
+  "height": 20,
+  "tilewidth": 16,
+  "tileheight": 16,
+  "infinite": false,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "type": "map",
+  "version": "1.10",
+  "tiledversion": "1.10.2",
+  "nextlayerid": 4,
+  "nextobjectid": 15,
+  "layers": [
+    {
+      "data": [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0,
+        0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0,
+        5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 2, 0, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0,
+        0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      ],
+      "height": 20,
+      "width": 30,
+      "id": 1,
+      "name": "ground",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "data": [
+        4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+        3, 3, 3, 3, 3, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+      ],
+      "height": 20,
+      "width": 30,
+      "id": 2,
+      "name": "walls",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "draworder": "topdown",
+      "id": 3,
+      "name": "objects",
+      "objects": [
+        {
+          "id": 1,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 208,
+          "y": 176,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 852 }]
+        },
+        {
+          "id": 2,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 224,
+          "y": 176,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 989 }]
+        },
+        {
+          "id": 3,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 240,
+          "y": 176,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 1126 }]
+        },
+        {
+          "id": 4,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 256,
+          "y": 176,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 1263 }]
+        },
+        {
+          "id": 5,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 208,
+          "y": 192,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 913 }]
+        },
+        {
+          "id": 6,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 224,
+          "y": 192,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 1050 }]
+        },
+        {
+          "id": 7,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 240,
+          "y": 192,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 1187 }]
+        },
+        {
+          "id": 8,
+          "name": "hazard_spike",
+          "type": "hazard_spike",
+          "x": 256,
+          "y": 192,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [{ "name": "phase", "type": "int", "value": 1324 }]
+        },
+        {
+          "id": 9,
+          "name": "vault_hoard",
+          "type": "chest",
+          "x": 240,
+          "y": 96,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "id", "type": "string", "value": "vault_hoard" },
+            {
+              "name": "lootTable",
+              "type": "string",
+              "value": "[{\"itemId\":\"blade_riverfang\",\"weight\":6},{\"itemId\":\"spear_windrake\",\"weight\":6},{\"itemId\":\"spell_frostlance\",\"weight\":6},{\"itemId\":\"ward_stone\",\"weight\":5}]"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "thorn_slinger",
+          "type": "enemy",
+          "x": 96,
+          "y": 128,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "id", "type": "string", "value": "thorn_slinger" }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "husk_thrall",
+          "type": "enemy",
+          "x": 368,
+          "y": 192,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "id", "type": "string", "value": "husk_thrall" }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "door_w",
+          "type": "door",
+          "x": 0,
+          "y": 128,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "w" },
+            { "name": "target", "type": "string", "value": "d1_causeway" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "door_w",
+          "type": "door",
+          "x": 0,
+          "y": 144,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "w" },
+            { "name": "target", "type": "string", "value": "d1_causeway" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "exit_w",
+          "type": "exit",
+          "x": 0,
+          "y": 128,
+          "width": 16,
+          "height": 32,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "direction", "type": "string", "value": "w" },
+            { "name": "target", "type": "string", "value": "d1_causeway" },
+            { "name": "locked", "type": "bool", "value": false }
+          ]
+        }
+      ],
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0
+    }
+  ],
+  "tilesets": [
+    {
+      "columns": 8,
+      "firstgid": 1,
+      "image": "runtime-generated",
+      "imageheight": 16,
+      "imagewidth": 128,
+      "margin": 0,
+      "name": "base",
+      "spacing": 0,
+      "tilecount": 8,
+      "tileheight": 16,
+      "tilewidth": 16
+    }
+  ]
+}

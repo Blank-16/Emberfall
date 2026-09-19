@@ -19,16 +19,16 @@ regenerate the Tiled maps from whatever is currently in `src/game/data/rooms/` a
 
 ## Controls
 
-| Action | Keyboard | Gamepad |
-|---|---|---|
-| Move | WASD / arrows | Left stick / D-pad |
-| Aim | Mouse | Right stick |
-| Attack | J / Space / left click | A / R2 |
-| Dash | Shift / K | B / L2 |
-| Swap weapon (hold) | Q | L1 / R1 |
-| Use potion | F | Y |
-| Interact | E / Enter | X |
-| Pause | Esc / P | Start |
+| Action             | Keyboard               | Gamepad            |
+| ------------------ | ---------------------- | ------------------ |
+| Move               | WASD / arrows          | Left stick / D-pad |
+| Aim                | Mouse                  | Right stick        |
+| Attack             | J / Space / left click | A / R2             |
+| Dash               | Shift / K              | B / L2             |
+| Swap weapon (hold) | Q                      | L1 / R1            |
+| Use potion         | F                      | Y                  |
+| Interact           | E / Enter              | X                  |
+| Pause              | Esc / P                | Start              |
 
 Weapon swap requires holding the key ~130ms (`SWAP_HOLD_MS` in `input/InputManager.ts`) so a
 combo input can't accidentally trigger it. A swap is rejected while the active weapon is still

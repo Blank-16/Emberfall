@@ -1,14 +1,14 @@
-import Phaser from 'phaser';
-import { DEPTH, TUNING } from '../core/GameConfig';
-import { EventBus } from '../core/EventBus';
-import { TextureKeys } from '../core/TextureFactory';
-import type { Rng } from '../core/Rng';
-import type { Entity } from '../entities/Entity';
-import { AbilityEffectRegistry } from './AbilityEffectRegistry';
-import { DamageCalculator } from './DamageCalculator';
-import { Hitbox, Projectile } from './Hitbox';
-import { SpatialGrid } from './SpatialGrid';
-import type { AttackContext, HitboxSpec, ProjectileSpec } from './CombatTypes';
+import Phaser from "phaser";
+import { DEPTH, TUNING } from "../core/GameConfig";
+import { EventBus } from "../core/EventBus";
+import { TextureKeys } from "../core/TextureFactory";
+import type { Rng } from "../core/Rng";
+import type { Entity } from "../entities/Entity";
+import { AbilityEffectRegistry } from "./AbilityEffectRegistry";
+import { DamageCalculator } from "./DamageCalculator";
+import { Hitbox, Projectile } from "./Hitbox";
+import { SpatialGrid } from "./SpatialGrid";
+import type { AttackContext, HitboxSpec, ProjectileSpec } from "./CombatTypes";
 
 const HIT_STOP_SCALE = 5;
 
@@ -37,7 +37,9 @@ export class CombatSystem {
       runChildUpdate: false,
       allowGravity: false,
     });
-    this.damageTexts = scene.add.group({ maxSize: TUNING.combat.maxDamageText });
+    this.damageTexts = scene.add.group({
+      maxSize: TUNING.combat.maxDamageText,
+    });
 
     this.particles = scene.add.particles(0, 0, TextureKeys.particle, {
       lifespan: 320,
@@ -72,7 +74,8 @@ export class CombatSystem {
       nowMs,
       spawnHitbox: (spec) => this.spawnHitbox(spec),
       spawnProjectile: (spec) => this.spawnProjectile(spec),
-      shake: (intensity, durationMs) => this.scene.cameras.main.shake(durationMs, intensity),
+      shake: (intensity, durationMs) =>
+        this.scene.cameras.main.shake(durationMs, intensity),
     };
   }
 
@@ -80,11 +83,20 @@ export class CombatSystem {
     const hitbox = this.hitboxes.get(spec.x, spec.y) as Hitbox | null;
     if (!hitbox) return;
     hitbox.fire(spec, this.scene.time.now);
-    this.scene.tweens.add({ targets: hitbox, alpha: 0, duration: spec.durationMs, ease: 'Quad.easeOut' });
+    this.scene.tweens.add({
+      targets: hitbox,
+      alpha: 0,
+      duration: spec.durationMs,
+      ease: "Quad.easeOut",
+    });
   }
 
   spawnProjectile(spec: ProjectileSpec): void {
-    const projectile = this.projectiles.get(spec.x, spec.y, TextureKeys.projectile) as Projectile | null;
+    const projectile = this.projectiles.get(
+      spec.x,
+      spec.y,
+      TextureKeys.projectile,
+    ) as Projectile | null;
     if (!projectile) return;
     projectile.fire(spec, this.scene.time.now);
   }
@@ -135,7 +147,11 @@ export class CombatSystem {
       if (target.isDead || !target.active) continue;
       if (target.faction === source.faction) continue;
       if (source.hitTargets.has(target.entityId)) continue;
-      if (source instanceof Hitbox && source.hitTargets.size >= source.maxTargets) break;
+      if (
+        source instanceof Hitbox &&
+        source.hitTargets.size >= source.maxTargets
+      )
+        break;
 
       const targetBody = target.body as Phaser.Physics.Arcade.Body;
       if (!targetBody.enable) continue;
@@ -152,15 +168,23 @@ export class CombatSystem {
     }
   }
 
-  private applyHit(source: Hitbox | Projectile, target: Entity, nowMs: number): void {
+  private applyHit(
+    source: Hitbox | Projectile,
+    target: Entity,
+    nowMs: number,
+  ): void {
     const attackerMultiplier = source.owner?.status.damageMultiplier ?? 1;
-    const roll = DamageCalculator.roll({ baseDamage: source.damage, attackerMultiplier }, this.rng);
+    const roll = DamageCalculator.roll(
+      { baseDamage: source.damage, attackerMultiplier },
+      this.rng,
+    );
 
     const applied = target.takeDamage(roll.amount, nowMs, {
       knockbackFrom: { x: source.x, y: source.y },
       knockbackForce: source.knockback,
       critical: roll.critical,
-      invulnerabilityMs: target.faction === 'player' ? TUNING.player.hitInvulnerabilityMs : 0,
+      invulnerabilityMs:
+        target.faction === "player" ? TUNING.player.hitInvulnerabilityMs : 0,
     });
     if (applied <= 0) return;
 
@@ -169,22 +193,27 @@ export class CombatSystem {
       source: source.owner,
       target,
       rng: this.rng,
-      queryEnemiesNear: (x, y, radius, exclude) => this.queryNear(x, y, radius, target.faction, exclude),
+      queryEnemiesNear: (x, y, radius, exclude) =>
+        this.queryNear(x, y, radius, target.faction, exclude),
       dealDamage: (chained, amount, fromX, fromY, knockback) => {
         const chainedApplied = chained.takeDamage(amount, nowMs, {
           knockbackFrom: { x: fromX, y: fromY },
           knockbackForce: knockback,
         });
-        if (chainedApplied > 0) this.showDamage(chained.x, chained.y, chainedApplied, false);
+        if (chainedApplied > 0)
+          this.showDamage(chained.x, chained.y, chainedApplied, false);
       },
       spawnBurst: (x, y, tint, count) => this.spawnBurst(x, y, tint, count),
     });
 
     this.showDamage(target.x, target.y, applied, roll.critical);
     this.spawnBurst(target.x, target.y, 0xfff0d0, roll.critical ? 8 : 4);
-    this.applyHitStop(nowMs, roll.critical ? TUNING.combat.hitStopMs * 1.6 : TUNING.combat.hitStopMs);
+    this.applyHitStop(
+      nowMs,
+      roll.critical ? TUNING.combat.hitStopMs * 1.6 : TUNING.combat.hitStopMs,
+    );
 
-    EventBus.emit('combat:damage-dealt', {
+    EventBus.emit("combat:damage-dealt", {
       amount: applied,
       critical: roll.critical,
       x: target.x,
@@ -193,11 +222,22 @@ export class CombatSystem {
     });
   }
 
-  queryNear(x: number, y: number, radius: number, excludeFaction: string, exclude: Entity): Entity[] {
+  queryNear(
+    x: number,
+    y: number,
+    radius: number,
+    excludeFaction: string,
+    exclude: Entity,
+  ): Entity[] {
     const radiusSq = radius * radius;
     const found: Entity[] = [];
     for (const candidate of this.targets) {
-      if (candidate === exclude || candidate.isDead || candidate.faction !== excludeFaction) continue;
+      if (
+        candidate === exclude ||
+        candidate.isDead ||
+        candidate.faction !== excludeFaction
+      )
+        continue;
       const dx = candidate.x - x;
       const dy = candidate.y - y;
       if (dx * dx + dy * dy <= radiusSq) found.push(candidate);
@@ -215,14 +255,21 @@ export class CombatSystem {
     this.particles.emitParticleAt(x, y, count);
   }
 
-  private showDamage(x: number, y: number, amount: number, critical: boolean): void {
-    let text = this.damageTexts.getFirstDead(false) as Phaser.GameObjects.Text | null;
+  private showDamage(
+    x: number,
+    y: number,
+    amount: number,
+    critical: boolean,
+  ): void {
+    let text = this.damageTexts.getFirstDead(
+      false,
+    ) as Phaser.GameObjects.Text | null;
     if (!text) {
       if (this.damageTexts.getLength() >= TUNING.combat.maxDamageText) return;
-      text = this.scene.add.text(x, y, '', {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: '#ffffff',
+      text = this.scene.add.text(x, y, "", {
+        fontFamily: "monospace",
+        fontSize: "10px",
+        color: "#ffffff",
       });
       text.setDepth(DEPTH.damageText).setOrigin(0.5);
       this.damageTexts.add(text);
@@ -231,7 +278,7 @@ export class CombatSystem {
     text.setActive(true).setVisible(true);
     text.setPosition(x, y - 10);
     text.setText(critical ? `${amount}!` : `${amount}`);
-    text.setColor(critical ? '#ffd257' : '#f4f4f4');
+    text.setColor(critical ? "#ffd257" : "#f4f4f4");
     text.setScale(critical ? 1.25 : 1);
     text.setAlpha(1);
 
@@ -240,7 +287,7 @@ export class CombatSystem {
       y: y - 26,
       alpha: 0,
       duration: 520,
-      ease: 'Quad.easeOut',
+      ease: "Quad.easeOut",
       onComplete: () => text?.setActive(false).setVisible(false),
     });
   }
@@ -253,12 +300,16 @@ export class CombatSystem {
    */
   releaseAll(): void {
     try {
-      if (this.hitboxes.scene) for (const child of this.hitboxes.getChildren()) (child as Hitbox).deactivate();
+      if (this.hitboxes.scene)
+        for (const child of this.hitboxes.getChildren())
+          (child as Hitbox).deactivate();
     } catch {
       // Already destroyed by Phaser's own teardown; nothing to release.
     }
     try {
-      if (this.projectiles.scene) for (const child of this.projectiles.getChildren()) (child as Projectile).deactivate();
+      if (this.projectiles.scene)
+        for (const child of this.projectiles.getChildren())
+          (child as Projectile).deactivate();
     } catch {
       // Already destroyed by Phaser's own teardown; nothing to release.
     }
@@ -271,6 +322,14 @@ export class CombatSystem {
   }
 }
 
-function bodiesOverlap(a: Phaser.Physics.Arcade.Body, b: Phaser.Physics.Arcade.Body): boolean {
-  return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+function bodiesOverlap(
+  a: Phaser.Physics.Arcade.Body,
+  b: Phaser.Physics.Arcade.Body,
+): boolean {
+  return (
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y
+  );
 }

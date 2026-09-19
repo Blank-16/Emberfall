@@ -1,7 +1,7 @@
-import type Phaser from 'phaser';
-import { Weapon } from '../Weapon';
-import type { AttackContext } from '../CombatTypes';
-import type { WeaponStats } from '../../core/types';
+import type Phaser from "phaser";
+import { Weapon } from "../Weapon";
+import type { AttackContext } from "../CombatTypes";
+import type { WeaponStats } from "../../core/types";
 
 const SPREAD_DEGREES = 9;
 
@@ -34,21 +34,22 @@ export class MagicWeapon extends Weapon {
         faction: context.owner.faction,
         abilityEffectId: this.stats.abilityEffectId,
         owner: context.owner,
-        lifetimeMs: (this.stats.range / (this.stats.projectileSpeed ?? 240)) * 1000,
+        lifetimeMs:
+          (this.stats.range / (this.stats.projectileSpeed ?? 240)) * 1000,
         tint: this.tintForEffect(),
         scale: 1.1,
-        piercing: this.stats.abilityEffectId === 'pierce_line',
+        piercing: this.stats.abilityEffectId === "pierce_line",
       });
     }
   }
 
   private tintForEffect(): number {
     switch (this.stats.abilityEffectId) {
-      case 'ignite':
+      case "ignite":
         return 0xff7a3c;
-      case 'frost_slow':
+      case "frost_slow":
         return 0x8fd8ff;
-      case 'chain_lightning':
+      case "chain_lightning":
         return 0xd9c8ff;
       default:
         return 0xffffff;

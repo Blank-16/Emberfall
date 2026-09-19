@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 
 export interface InputSnapshot {
   moveX: number;
@@ -48,7 +48,10 @@ export const SWAP_HOLD_MS = 130;
 const STICK_DEADZONE = 0.25;
 
 export class InputManager {
-  private readonly keys = new Map<keyof InputBindings, Phaser.Input.Keyboard.Key[]>();
+  private readonly keys = new Map<
+    keyof InputBindings,
+    Phaser.Input.Keyboard.Key[]
+  >();
   private readonly snapshot: InputSnapshot = {
     moveX: 0,
     moveY: 0,
@@ -75,9 +78,12 @@ export class InputManager {
     bindings: InputBindings = DEFAULT_BINDINGS,
   ) {
     const keyboard = scene.input.keyboard;
-    if (!keyboard) throw new Error('Keyboard input unavailable');
+    if (!keyboard) throw new Error("Keyboard input unavailable");
 
-    for (const [action, codes] of Object.entries(bindings) as [keyof InputBindings, number[]][]) {
+    for (const [action, codes] of Object.entries(bindings) as [
+      keyof InputBindings,
+      number[],
+    ][]) {
       this.keys.set(
         action,
         codes.map((code) => keyboard.addKey(code, true, false)),
@@ -106,12 +112,16 @@ export class InputManager {
     return current && !previous;
   }
 
-  update(nowMs: number, ownerWorldX: number, ownerWorldY: number): InputSnapshot {
+  update(
+    nowMs: number,
+    ownerWorldX: number,
+    ownerWorldY: number,
+  ): InputSnapshot {
     const pad = this.pad;
     const s = this.snapshot;
 
-    let moveX = (this.isDown('right') ? 1 : 0) - (this.isDown('left') ? 1 : 0);
-    let moveY = (this.isDown('down') ? 1 : 0) - (this.isDown('up') ? 1 : 0);
+    let moveX = (this.isDown("right") ? 1 : 0) - (this.isDown("left") ? 1 : 0);
+    let moveY = (this.isDown("down") ? 1 : 0) - (this.isDown("up") ? 1 : 0);
 
     if (pad) {
       const stickX = pad.leftStick.x;
@@ -128,7 +138,10 @@ export class InputManager {
 
     const rightStickX = pad?.rightStick.x ?? 0;
     const rightStickY = pad?.rightStick.y ?? 0;
-    if (Math.abs(rightStickX) > STICK_DEADZONE || Math.abs(rightStickY) > STICK_DEADZONE) {
+    if (
+      Math.abs(rightStickX) > STICK_DEADZONE ||
+      Math.abs(rightStickY) > STICK_DEADZONE
+    ) {
       s.aimX = rightStickX;
       s.aimY = rightStickY;
       this.pointerAimActive = false;
@@ -148,17 +161,35 @@ export class InputManager {
     }
 
     const pointerDown = this.scene.input.activePointer.leftButtonDown();
-    const attackHeld = this.isDown('attack') || pointerDown || (pad?.A ?? false) || (pad?.R2 ?? 0) > 0.4;
-    s.attackPressed = this.edge('attack', attackHeld) || (pointerDown && !this.pointerDownPrev);
+    const attackHeld =
+      this.isDown("attack") ||
+      pointerDown ||
+      (pad?.A ?? false) ||
+      (pad?.R2 ?? 0) > 0.4;
+    s.attackPressed =
+      this.edge("attack", attackHeld) || (pointerDown && !this.pointerDownPrev);
     s.attackHeld = attackHeld;
     this.pointerDownPrev = pointerDown;
 
-    s.dashPressed = this.edge('dash', this.isDown('dash') || (pad?.B ?? false) || (pad?.L2 ?? 0) > 0.4);
-    s.interactPressed = this.edge('interact', this.isDown('interact') || (pad?.X ?? false));
-    s.potionPressed = this.edge('potion', this.isDown('potion') || (pad?.Y ?? false));
-    s.pausePressed = this.edge('pause', this.isDown('pause') || (pad?.buttons[9]?.pressed ?? false));
+    s.dashPressed = this.edge(
+      "dash",
+      this.isDown("dash") || (pad?.B ?? false) || (pad?.L2 ?? 0) > 0.4,
+    );
+    s.interactPressed = this.edge(
+      "interact",
+      this.isDown("interact") || (pad?.X ?? false),
+    );
+    s.potionPressed = this.edge(
+      "potion",
+      this.isDown("potion") || (pad?.Y ?? false),
+    );
+    s.pausePressed = this.edge(
+      "pause",
+      this.isDown("pause") || (pad?.buttons[9]?.pressed ?? false),
+    );
 
-    const swapDown = this.isDown('swap') || (pad?.L1 ?? false) || (pad?.R1 ?? false);
+    const swapDown =
+      this.isDown("swap") || (pad?.L1 ?? false) || (pad?.R1 ?? false);
     s.swapTriggered = false;
     if (swapDown) {
       if (this.swapPressedAtMs === null) {

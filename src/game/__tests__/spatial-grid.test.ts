@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { SpatialGrid } from '../combat/SpatialGrid';
+import { describe, expect, it } from "vitest";
+import { SpatialGrid } from "../combat/SpatialGrid";
 
 interface Point {
   readonly id: number;
@@ -7,8 +7,8 @@ interface Point {
   readonly y: number;
 }
 
-describe('SpatialGrid', () => {
-  it('never produces a false negative at the worst-case interaction radius (~75px)', () => {
+describe("SpatialGrid", () => {
+  it("never produces a false negative at the worst-case interaction radius (~75px)", () => {
     const REACH = 75;
     let checkedAtLeastOneCandidate = false;
 
@@ -28,11 +28,15 @@ describe('SpatialGrid', () => {
         grid.insert(point.x, point.y, point);
       }
 
-      const withinReach = (p: Point): boolean => Math.hypot(p.x - sourceX, p.y - sourceY) <= REACH;
+      const withinReach = (p: Point): boolean =>
+        Math.hypot(p.x - sourceX, p.y - sourceY) <= REACH;
       const expected = points.filter(withinReach).map((p) => p.id);
       if (expected.length > 0) checkedAtLeastOneCandidate = true;
 
-      const actual = grid.near(sourceX, sourceY).filter(withinReach).map((p) => p.id);
+      const actual = grid
+        .near(sourceX, sourceY)
+        .filter(withinReach)
+        .map((p) => p.id);
       for (const id of expected) {
         expect(actual).toContain(id);
       }
@@ -42,12 +46,12 @@ describe('SpatialGrid', () => {
     expect(checkedAtLeastOneCandidate).toBe(true);
   });
 
-  it('returns nothing for an empty grid', () => {
+  it("returns nothing for an empty grid", () => {
     const grid = new SpatialGrid<Point>();
     expect(grid.near(0, 0)).toEqual([]);
   });
 
-  it('clear() removes previously inserted items', () => {
+  it("clear() removes previously inserted items", () => {
     const grid = new SpatialGrid<Point>();
     grid.insert(0, 0, { id: 1, x: 0, y: 0 });
     grid.clear();

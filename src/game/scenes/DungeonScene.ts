@@ -1,31 +1,31 @@
-import Phaser from 'phaser';
-import { SceneKeys } from '../core/SceneKeys';
-import { TUNING } from '../core/GameConfig';
-import { EventBus } from '../core/EventBus';
-import { GameBridge } from '../core/GameBridge';
-import { generateTileset } from '../core/TextureFactory';
-import { Rng } from '../core/Rng';
-import { RunState } from '../core/RunState';
-import { wireSharedPlayerCommands } from '../core/SharedSceneCommands';
-import { GameData } from '../data/GameData';
-import { CombatSystem } from '../combat/CombatSystem';
-import type { Projectile } from '../combat/Hitbox';
-import { createWeapon } from '../combat/weapons/WeaponFactory';
-import { InputManager } from '../input/InputManager';
-import { Player } from '../entities/Player';
-import { Enemy } from '../entities/Enemy';
-import { Boss } from '../entities/Boss';
-import { Dungeon } from '../world/Dungeon';
-import { Room, type RoomServices } from '../world/Room';
-import { Pickup, type PickupKind } from '../world/Interactables';
-import type { Direction } from '../core/types';
+import Phaser from "phaser";
+import { SceneKeys } from "../core/SceneKeys";
+import { TUNING } from "../core/GameConfig";
+import { EventBus } from "../core/EventBus";
+import { GameBridge } from "../core/GameBridge";
+import { generateTileset } from "../core/TextureFactory";
+import { Rng } from "../core/Rng";
+import { RunState } from "../core/RunState";
+import { wireSharedPlayerCommands } from "../core/SharedSceneCommands";
+import { GameData } from "../data/GameData";
+import { CombatSystem } from "../combat/CombatSystem";
+import type { Projectile } from "../combat/Hitbox";
+import { createWeapon } from "../combat/weapons/WeaponFactory";
+import { InputManager } from "../input/InputManager";
+import { Player } from "../entities/Player";
+import { Enemy } from "../entities/Enemy";
+import { Boss } from "../entities/Boss";
+import { Dungeon } from "../world/Dungeon";
+import { Room, type RoomServices } from "../world/Room";
+import { Pickup, type PickupKind } from "../world/Interactables";
+import type { Direction } from "../core/types";
 
-type ReturnReason = 'death' | 'cleared' | 'manual';
+type ReturnReason = "death" | "cleared" | "manual";
 
 const PICKUP_POOL_SIZE = 96;
 
 export class DungeonScene extends Phaser.Scene {
-  private dungeonId = '';
+  private dungeonId = "";
   private dungeon!: Dungeon;
   private rng!: Rng;
   private combat!: CombatSystem;
@@ -35,7 +35,7 @@ export class DungeonScene extends Phaser.Scene {
   private player!: Player;
 
   private currentRoom: Room | null = null;
-  private currentRoomId = '';
+  private currentRoomId = "";
   private lastMainPathIndex = 0;
   private roomColliders: Phaser.Physics.Arcade.Collider[] = [];
   private disposers: Array<() => void> = [];
@@ -52,7 +52,7 @@ export class DungeonScene extends Phaser.Scene {
   init(data: { dungeonId: string }): void {
     this.dungeonId = data.dungeonId;
     this.currentRoom = null;
-    this.currentRoomId = '';
+    this.currentRoomId = "";
     this.lastMainPathIndex = 0;
     this.roomColliders = [];
     this.disposers = [];
@@ -64,7 +64,10 @@ export class DungeonScene extends Phaser.Scene {
   preload(): void {
     const definition = GameData.dungeon(this.dungeonId);
     for (const room of definition.rooms) {
-      this.load.tilemapTiledJSON(room.tiledMapKey, `/maps/${room.tiledMapKey}.json`);
+      this.load.tilemapTiledJSON(
+        room.tiledMapKey,
+        `/maps/${room.tiledMapKey}.json`,
+      );
     }
   }
 
@@ -76,37 +79,63 @@ export class DungeonScene extends Phaser.Scene {
     this.rng = new Rng();
     this.combat = new CombatSystem(this, this.rng);
     this.enemyGroup = this.physics.add.group();
-    this.pickupGroup = this.physics.add.group({ classType: Pickup, maxSize: PICKUP_POOL_SIZE, runChildUpdate: false });
+    this.pickupGroup = this.physics.add.group({
+      classType: Pickup,
+      maxSize: PICKUP_POOL_SIZE,
+      runChildUpdate: false,
+    });
     this.inputManager = new InputManager(this);
 
-    this.player = new Player(this, 0, 0, RunState.loadout, RunState.inventory, this.combat, GameData.potions);
+    this.player = new Player(
+      this,
+      0,
+      0,
+      RunState.loadout,
+      RunState.inventory,
+      this.combat,
+      GameData.potions,
+    );
     this.player.spawnFresh(0, 0);
     this.combat.registerTarget(this.player);
 
-    this.cameras.main.startFollow(this.player, true, TUNING.world.cameraLerp, TUNING.world.cameraLerp);
+    this.cameras.main.startFollow(
+      this.player,
+      true,
+      TUNING.world.cameraLerp,
+      TUNING.world.cameraLerp,
+    );
     this.enterRoom(this.dungeon.entryRoomId, null);
 
     this.disposers.push(
       ...wireSharedPlayerCommands(this, this.player),
-      GameBridge.on('command:swap-weapon', () => this.player.trySwapWeapon(this.time.now)),
-      GameBridge.on('command:return-hub', ({ reason }) => this.returnToHub(reason)),
-      EventBus.on('player:died', () => {
+      GameBridge.on("command:swap-weapon", () =>
+        this.player.trySwapWeapon(this.time.now),
+      ),
+      GameBridge.on("command:return-hub", ({ reason }) =>
+        this.returnToHub(reason),
+      ),
+      EventBus.on("player:died", () => {
         this.player.setInputLocked(true);
-        this.time.delayedCall(1400, () => this.returnToHub('death'));
+        this.time.delayedCall(1400, () => this.returnToHub("death"));
       }),
-      EventBus.on('boss:defeated', () => {
-        if (this.currentRoomId === this.dungeon.bossRoomId) this.handleDungeonCleared();
+      EventBus.on("boss:defeated", () => {
+        if (this.currentRoomId === this.dungeon.bossRoomId)
+          this.handleDungeonCleared();
       }),
     );
 
-    EventBus.emit('game:scene-changed', { scene: SceneKeys.Dungeon });
+    EventBus.emit("game:scene-changed", { scene: SceneKeys.Dungeon });
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.teardown());
   }
 
   override update(time: number, delta: number): void {
     if (this.leavingScene) return;
 
-    const snapshot = this.inputManager.update(time, this.player.x, this.player.y);
+    const snapshot = this.inputManager.update(
+      time,
+      this.player.x,
+      this.player.y,
+    );
     this.player.handleInput(snapshot, time);
     this.player.tick(time, delta);
 
@@ -123,11 +152,15 @@ export class DungeonScene extends Phaser.Scene {
     this.currentRoom?.update(time, this.combatTargetsScratch);
     this.currentRoom?.collectPickupsNear(this.player);
 
-    const interactable = this.currentRoom?.nearestInteractable(this.player) ?? null;
-    EventBus.emit('ui:interact-prompt', { label: interactable?.promptLabel ?? null });
+    const interactable =
+      this.currentRoom?.nearestInteractable(this.player) ?? null;
+    EventBus.emit("ui:interact-prompt", {
+      label: interactable?.promptLabel ?? null,
+    });
     if (snapshot.interactPressed) interactable?.interact();
 
-    if (snapshot.pausePressed) GameBridge.pauseGame(!this.physics.world.isPaused);
+    if (snapshot.pausePressed)
+      GameBridge.pauseGame(!this.physics.world.isPaused);
   }
 
   private enterRoom(roomId: string, fromDirection: Direction | null): void {
@@ -141,8 +174,10 @@ export class DungeonScene extends Phaser.Scene {
       spawnEnemy: (enemyId, x, y) => this.createEnemy(enemyId, x, y),
       spawnBoss: (bossId, x, y) => this.createBoss(bossId, x, y),
       unregisterEnemy: (enemy) => this.combat.unregisterTarget(enemy),
-      spawnPickup: (kind, payloadId, amount, tint, x, y) => this.spawnPickup(kind, payloadId, amount, tint, x, y),
-      requestTransition: (direction, targetRoomId) => this.beginTransition(direction, targetRoomId),
+      spawnPickup: (kind, payloadId, amount, tint, x, y) =>
+        this.spawnPickup(kind, payloadId, amount, tint, x, y),
+      requestTransition: (direction, targetRoomId) =>
+        this.beginTransition(direction, targetRoomId),
       onPickupCollected: (pickup) => this.handlePickup(pickup),
     };
 
@@ -150,22 +185,29 @@ export class DungeonScene extends Phaser.Scene {
     room.build();
     this.currentRoom = room;
     this.currentRoomId = roomId;
-    this.registry.set('currentRoomId', roomId);
+    this.registry.set("currentRoomId", roomId);
 
-    const spawnPoint = fromDirection ? room.entryPointFrom(fromDirection) : room.spawnPoint;
+    const spawnPoint = fromDirection
+      ? room.entryPointFrom(fromDirection)
+      : room.spawnPoint;
     this.player.teleport(spawnPoint.x, spawnPoint.y);
 
     this.wireRoomColliders(room);
 
     this.cameras.main.stopFollow();
     this.cameras.main.centerOn(spawnPoint.x, spawnPoint.y);
-    this.cameras.main.startFollow(this.player, true, TUNING.world.cameraLerp, TUNING.world.cameraLerp);
+    this.cameras.main.startFollow(
+      this.player,
+      true,
+      TUNING.world.cameraLerp,
+      TUNING.world.cameraLerp,
+    );
 
     this.time.delayedCall(200, () => room.armTransitions());
 
     const mainPathIndex = this.dungeon.mainPathIndex(roomId);
     if (mainPathIndex >= 0) this.lastMainPathIndex = mainPathIndex;
-    EventBus.emit('room:entered', {
+    EventBus.emit("room:entered", {
       roomId,
       locked: !room.cleared,
       index: this.lastMainPathIndex,
@@ -182,14 +224,19 @@ export class DungeonScene extends Phaser.Scene {
       this.roomColliders.push(
         this.physics.add.collider(this.player, wallLayer),
         this.physics.add.collider(this.enemyGroup, wallLayer),
-        this.physics.add.collider(this.combat.projectileGroup, wallLayer, (obj) => {
-          this.combat.onProjectileHitWall(obj as Projectile);
-        }),
+        this.physics.add.collider(
+          this.combat.projectileGroup,
+          wallLayer,
+          (obj) => {
+            this.combat.onProjectileHitWall(obj as Projectile);
+          },
+        ),
       );
     }
 
     const doors = room.doorColliders;
-    if (doors.length > 0) this.roomColliders.push(this.physics.add.collider(this.player, doors));
+    if (doors.length > 0)
+      this.roomColliders.push(this.physics.add.collider(this.player, doors));
   }
 
   private beginTransition(direction: Direction, targetRoomId: string): void {
@@ -198,12 +245,15 @@ export class DungeonScene extends Phaser.Scene {
     this.player.setInputLocked(true);
 
     this.cameras.main.fadeOut(TUNING.world.roomTransitionMs, 10, 8, 18);
-    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.enterRoom(targetRoomId, direction);
-      this.player.setInputLocked(false);
-      this.cameras.main.fadeIn(TUNING.world.roomTransitionMs, 10, 8, 18);
-      this.transitioning = false;
-    });
+    this.cameras.main.once(
+      Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
+      () => {
+        this.enterRoom(targetRoomId, direction);
+        this.player.setInputLocked(false);
+        this.cameras.main.fadeIn(TUNING.world.roomTransitionMs, 10, 8, 18);
+        this.transitioning = false;
+      },
+    );
   }
 
   private createEnemy(enemyId: string, x: number, y: number): Enemy {
@@ -217,10 +267,18 @@ export class DungeonScene extends Phaser.Scene {
 
   private createBoss(bossId: string, x: number, y: number): Boss {
     const definition = GameData.boss(bossId);
-    const boss = new Boss(this, x, y, definition, this.combat, this.rng, (summonId, sx, sy) => {
-      const summoned = this.createEnemy(summonId, sx, sy);
-      this.currentRoom?.trackEnemy(summoned);
-    });
+    const boss = new Boss(
+      this,
+      x,
+      y,
+      definition,
+      this.combat,
+      this.rng,
+      (summonId, sx, sy) => {
+        const summoned = this.createEnemy(summonId, sx, sy);
+        this.currentRoom?.trackEnemy(summoned);
+      },
+    );
     boss.setTarget(this.player);
     this.enemyGroup.add(boss);
     this.combat.registerTarget(boss);
@@ -242,41 +300,62 @@ export class DungeonScene extends Phaser.Scene {
   }
 
   private handlePickup(pickup: Pickup): void {
-    if (pickup.kind === 'coin') {
+    if (pickup.kind === "coin") {
       RunState.inventory.addCurrency(pickup.amount);
       return;
     }
     if (GameData.isPotion(pickup.payloadId)) {
       if (!RunState.inventory.addPotion(pickup.payloadId, pickup.amount)) {
-        EventBus.emit('ui:toast', { message: 'Potion pouch full', tone: 'warn' });
+        EventBus.emit("ui:toast", {
+          message: "Potion pouch full",
+          tone: "warn",
+        });
       }
       return;
     }
 
     const weaponStats = GameData.weapons.get(pickup.payloadId);
     if (!weaponStats) {
-      EventBus.emit('ui:toast', { message: 'Found something unidentifiable', tone: 'warn' });
+      EventBus.emit("ui:toast", {
+        message: "Found something unidentifiable",
+        tone: "warn",
+      });
       return;
     }
-    RunState.loadout.equip(RunState.loadout.slot === 0 ? 1 : 0, createWeapon(weaponStats));
-    EventBus.emit('ui:toast', { message: `Equipped ${weaponStats.displayName}`, tone: 'reward' });
+    RunState.loadout.equip(
+      RunState.loadout.slot === 0 ? 1 : 0,
+      createWeapon(weaponStats),
+    );
+    EventBus.emit("ui:toast", {
+      message: `Equipped ${weaponStats.displayName}`,
+      tone: "reward",
+    });
   }
 
   private handleDungeonCleared(): void {
     const reward = 40 + this.rng.intRange(0, 20);
     RunState.inventory.addCurrency(reward);
-    EventBus.emit('ui:toast', { message: `Dungeon cleared! +${reward} embers`, tone: 'reward' });
-    EventBus.emit('dungeon:cleared', { dungeonId: this.dungeon.id, currency: RunState.inventory.currency });
-    this.time.delayedCall(1800, () => this.returnToHub('cleared'));
+    EventBus.emit("ui:toast", {
+      message: `Dungeon cleared! +${reward} embers`,
+      tone: "reward",
+    });
+    EventBus.emit("dungeon:cleared", {
+      dungeonId: this.dungeon.id,
+      currency: RunState.inventory.currency,
+    });
+    this.time.delayedCall(1800, () => this.returnToHub("cleared"));
   }
 
   private returnToHub(_reason: ReturnReason): void {
     if (this.leavingScene) return;
     this.leavingScene = true;
     this.cameras.main.fadeOut(280, 0, 0, 0);
-    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.scene.start(SceneKeys.Hub);
-    });
+    this.cameras.main.once(
+      Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
+      () => {
+        this.scene.start(SceneKeys.Hub);
+      },
+    );
   }
 
   private teardown(): void {

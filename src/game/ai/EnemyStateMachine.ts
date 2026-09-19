@@ -1,6 +1,6 @@
-import type { EnemyBehavior, EnemyDefinition } from '../core/types';
+import type { EnemyBehavior, EnemyDefinition } from "../core/types";
 
-export type EnemyState = 'idle' | 'aggro' | 'attack' | 'recover' | 'flee';
+export type EnemyState = "idle" | "aggro" | "attack" | "recover" | "flee";
 
 export interface EnemyContext {
   readonly definition: EnemyDefinition;
@@ -49,7 +49,11 @@ export class StateMachine<C, S extends string> {
 
   update(nowMs: number): void {
     const elapsed = nowMs - this.enteredAtMs;
-    const next = this.states[this.currentState].onUpdate(this.context, nowMs, elapsed);
+    const next = this.states[this.currentState].onUpdate(
+      this.context,
+      nowMs,
+      elapsed,
+    );
     if (next && next !== this.currentState) this.transition(next as S, nowMs);
   }
 }
@@ -57,32 +61,40 @@ export class StateMachine<C, S extends string> {
 const KITE_MIN_RATIO = 0.6;
 
 function shouldFlee(context: EnemyContext): boolean {
-  return context.definition.fleeHealthRatio > 0 && context.healthRatio() <= context.definition.fleeHealthRatio;
+  return (
+    context.definition.fleeHealthRatio > 0 &&
+    context.healthRatio() <= context.definition.fleeHealthRatio
+  );
 }
 
-function buildStates(behavior: EnemyBehavior): Readonly<Record<EnemyState, StateDefinition<EnemyContext>>> {
-  const chases = behavior !== 'stationary_turret';
+function buildStates(
+  behavior: EnemyBehavior,
+): Readonly<Record<EnemyState, StateDefinition<EnemyContext>>> {
+  const chases = behavior !== "stationary_turret";
 
   return {
     idle: {
       onEnter: (context) => context.halt(),
       onUpdate: (context) => {
         if (!context.hasTarget()) return null;
-        return context.distanceToTarget() <= context.definition.aggroRange ? 'aggro' : null;
+        return context.distanceToTarget() <= context.definition.aggroRange
+          ? "aggro"
+          : null;
       },
     },
 
     aggro: {
       onUpdate: (context, nowMs) => {
-        if (!context.hasTarget()) return 'idle';
+        if (!context.hasTarget()) return "idle";
         const distance = context.distanceToTarget();
         const { aggroRange, attackRange } = context.definition;
 
-        if (distance > aggroRange * 1.6) return 'idle';
-        if (shouldFlee(context)) return 'flee';
+        if (distance > aggroRange * 1.6) return "idle";
+        if (shouldFlee(context)) return "flee";
 
-        if (behavior === 'ranged_kiter') {
-          if (distance < attackRange * KITE_MIN_RATIO) context.moveAway(1, nowMs);
+        if (behavior === "ranged_kiter") {
+          if (distance < attackRange * KITE_MIN_RATIO)
+            context.moveAway(1, nowMs);
           else if (distance > attackRange) context.moveToward(1, nowMs);
           else context.strafe(0.7, nowMs);
         } else if (chases) {
@@ -93,7 +105,9 @@ function buildStates(behavior: EnemyBehavior): Readonly<Record<EnemyState, State
         }
 
         context.faceTarget();
-        return distance <= attackRange && context.hasLineOfSight() ? 'attack' : null;
+        return distance <= attackRange && context.hasLineOfSight()
+          ? "attack"
+          : null;
       },
     },
 
@@ -110,33 +124,38 @@ function buildStates(behavior: EnemyBehavior): Readonly<Record<EnemyState, State
           context.executeAttack(nowMs);
           return null;
         }
-        return 'recover';
+        return "recover";
       },
     },
 
     recover: {
       onUpdate: (context, _nowMs, elapsed) => {
         if (elapsed < context.definition.attackRecoveryMs) return null;
-        if (shouldFlee(context)) return 'flee';
-        return context.hasTarget() ? 'aggro' : 'idle';
+        if (shouldFlee(context)) return "flee";
+        return context.hasTarget() ? "aggro" : "idle";
       },
     },
 
     flee: {
       onUpdate: (context, nowMs, elapsed) => {
-        if (!context.hasTarget()) return 'idle';
+        if (!context.hasTarget()) return "idle";
         context.moveAway(1.15, nowMs);
-        if (elapsed > 1400 || !shouldFlee(context)) return 'aggro';
+        if (elapsed > 1400 || !shouldFlee(context)) return "aggro";
         return null;
       },
     },
   };
 }
 
-const cache = new Map<EnemyBehavior, Readonly<Record<EnemyState, StateDefinition<EnemyContext>>>>();
+const cache = new Map<
+  EnemyBehavior,
+  Readonly<Record<EnemyState, StateDefinition<EnemyContext>>>
+>();
 
 /** State tables are stateless and behavior-scoped, so one table is shared by all enemies of a behavior. */
-export function getEnemyStates(behavior: EnemyBehavior): Readonly<Record<EnemyState, StateDefinition<EnemyContext>>> {
+export function getEnemyStates(
+  behavior: EnemyBehavior,
+): Readonly<Record<EnemyState, StateDefinition<EnemyContext>>> {
   let states = cache.get(behavior);
   if (!states) {
     states = buildStates(behavior);

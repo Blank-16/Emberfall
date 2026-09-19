@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&display=swap");
 
 :root {
   --ink: #120f16;
@@ -12,9 +12,9 @@
   --steel: #4d4657;
   --steel-dark: #2c2733;
 
-  --font-display: 'Spectral', Georgia, 'Times New Roman', serif;
-  --font-body: -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+  --font-display: "Spectral", Georgia, "Times New Roman", serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
 }
 
 * {
@@ -71,7 +71,14 @@ body,
 .plate {
   background: linear-gradient(180deg, var(--ink-soft), var(--ink));
   border: 1px solid var(--steel);
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
   padding: 10px 14px;
 }
 
@@ -467,6 +474,6 @@ body,
   font-size: 12px;
 }
 
-.settings-row input[type='range'] {
+.settings-row input[type="range"] {
   width: 100%;
 }

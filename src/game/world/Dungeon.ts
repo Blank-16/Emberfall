@@ -1,4 +1,4 @@
-import type { DungeonDefinition, RoomDefinition } from '../core/types';
+import type { DungeonDefinition, RoomDefinition } from "../core/types";
 
 export class Dungeon {
   private readonly roomsById = new Map<string, RoomDefinition>();
@@ -6,7 +6,9 @@ export class Dungeon {
 
   constructor(readonly definition: DungeonDefinition) {
     for (const room of definition.rooms) this.roomsById.set(room.id, room);
-    this.mainPathRoomIds = definition.rooms.filter((room) => !room.optional).map((room) => room.id);
+    this.mainPathRoomIds = definition.rooms
+      .filter((room) => !room.optional)
+      .map((room) => room.id);
   }
 
   get id(): string {
@@ -32,7 +34,8 @@ export class Dungeon {
 
   room(id: string): RoomDefinition {
     const found = this.roomsById.get(id);
-    if (!found) throw new Error(`Dungeon ${this.definition.id}: unknown room ${id}`);
+    if (!found)
+      throw new Error(`Dungeon ${this.definition.id}: unknown room ${id}`);
     return found;
   }
 

@@ -1,7 +1,8 @@
-export type WeaponClass = 'sword' | 'spear' | 'heavy' | 'magic';
-export type Direction = 'n' | 's' | 'e' | 'w';
-export type Faction = 'player' | 'enemy';
-export type EnemyBehavior = 'melee_chaser' | 'ranged_kiter' | 'stationary_turret';
+export type WeaponClass = "sword" | "spear" | "heavy" | "magic";
+export type Direction = "n" | "s" | "e" | "w";
+export type Faction = "player" | "enemy";
+export type EnemyBehavior =
+  "melee_chaser" | "ranged_kiter" | "stationary_turret";
 
 export interface WeaponStats {
   readonly id: string;
@@ -38,7 +39,11 @@ export interface RoomDefinition {
   readonly id: string;
   readonly tiledMapKey: string;
   readonly exits: ReadonlyArray<RoomExit>;
-  readonly enemySpawns: ReadonlyArray<{ enemyType: string; x: number; y: number }>;
+  readonly enemySpawns: ReadonlyArray<{
+    enemyType: string;
+    x: number;
+    y: number;
+  }>;
   readonly lootTable: ReadonlyArray<WeightedEntry>;
   /** Side room: doesn't gate the boss path and isn't counted in main-path progress. */
   readonly optional?: boolean;
@@ -83,7 +88,8 @@ export interface EnemyDefinition {
   readonly currencyDrop: number;
 }
 
-export type BossAttackKind = 'radial_burst' | 'charge' | 'slam' | 'volley' | 'summon';
+export type BossAttackKind =
+  "radial_burst" | "charge" | "slam" | "volley" | "summon";
 
 export interface BossAttackPattern {
   readonly attackId: string;
@@ -103,7 +109,7 @@ export interface BossDefinition extends EnemyDefinition {
   readonly isMiniBoss: boolean;
 }
 
-export type PotionKind = 'heal' | 'speed' | 'damage' | 'shield';
+export type PotionKind = "heal" | "speed" | "damage" | "shield";
 
 export interface PotionDefinition {
   readonly id: string;

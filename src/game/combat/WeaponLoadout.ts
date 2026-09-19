@@ -1,5 +1,5 @@
-import { EventBus } from '../core/EventBus';
-import type { Weapon } from './Weapon';
+import { EventBus } from "../core/EventBus";
+import type { Weapon } from "./Weapon";
 
 export type LoadoutSlot = 0 | 1;
 
@@ -42,11 +42,16 @@ export class WeaponLoadout {
     const inActiveFrames = current.isInActiveFrames(nowMs);
 
     if (!current.canBeCancelledBySwap(elapsed)) {
-      EventBus.emit('weapon:swapped', { activeSlot: this.activeSlot, weaponId: current.id, cancelled: true });
+      EventBus.emit("weapon:swapped", {
+        activeSlot: this.activeSlot,
+        weaponId: current.id,
+        cancelled: true,
+      });
       return { swapped: false, cancelledRecovery: false };
     }
 
-    const cancelledRecovery = !inActiveFrames && elapsed < current.attackIntervalMs;
+    const cancelledRecovery =
+      !inActiveFrames && elapsed < current.attackIntervalMs;
     this.activeSlot = this.activeSlot === 0 ? 1 : 0;
     this.emitState(false);
     return { swapped: true, cancelledRecovery };
@@ -58,7 +63,7 @@ export class WeaponLoadout {
   }
 
   emitState(cancelled: boolean): void {
-    EventBus.emit('weapon:loadout-changed', {
+    EventBus.emit("weapon:loadout-changed", {
       activeSlot: this.activeSlot,
       slots: this.slots.map((weapon) => ({
         id: weapon.id,
@@ -66,7 +71,7 @@ export class WeaponLoadout {
         weaponClass: weapon.weaponClass,
       })),
     });
-    EventBus.emit('weapon:swapped', {
+    EventBus.emit("weapon:swapped", {
       activeSlot: this.activeSlot,
       weaponId: this.active.id,
       cancelled,

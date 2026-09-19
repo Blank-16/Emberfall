@@ -1,8 +1,8 @@
-import type Phaser from 'phaser';
-import { Weapon } from '../Weapon';
-import type { AttackContext } from '../CombatTypes';
-import { TextureKeys } from '../../core/TextureFactory';
-import type { WeaponStats } from '../../core/types';
+import type Phaser from "phaser";
+import { Weapon } from "../Weapon";
+import type { AttackContext } from "../CombatTypes";
+import { TextureKeys } from "../../core/TextureFactory";
+import type { WeaponStats } from "../../core/types";
 
 /** Slow wind-up, wide arc, heavy stagger. Trades mobility for crowd control. */
 export class HeavyWeapon extends Weapon {
@@ -38,6 +38,6 @@ export class HeavyWeapon extends Weapon {
   }
 
   override getAnimationKey(): string {
-    return 'heavy-swing';
+    return "heavy-swing";
   }
 }

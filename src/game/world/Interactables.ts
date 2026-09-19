@@ -1,10 +1,10 @@
-import Phaser from 'phaser';
-import { DEPTH, TILE_SIZE, TUNING } from '../core/GameConfig';
-import { EventBus } from '../core/EventBus';
-import { TextureKeys } from '../core/TextureFactory';
-import type { Direction, WeightedEntry } from '../core/types';
+import Phaser from "phaser";
+import { DEPTH, TILE_SIZE, TUNING } from "../core/GameConfig";
+import { EventBus } from "../core/EventBus";
+import { TextureKeys } from "../core/TextureFactory";
+import type { Direction, WeightedEntry } from "../core/types";
 
-export type PickupKind = 'coin' | 'potion' | 'weapon';
+export type PickupKind = "coin" | "potion" | "weapon";
 
 const TEXTURE_BY_KIND: Readonly<Record<PickupKind, string>> = {
   coin: TextureKeys.coin,
@@ -14,8 +14,8 @@ const TEXTURE_BY_KIND: Readonly<Record<PickupKind, string>> = {
 
 /** Pooled like Hitbox/Projectile: the scene owns a Group of these and calls activate()/deactivate(). */
 export class Pickup extends Phaser.Physics.Arcade.Sprite {
-  kind: PickupKind = 'coin';
-  payloadId = '';
+  kind: PickupKind = "coin";
+  payloadId = "";
   amount = 1;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -25,14 +25,19 @@ export class Pickup extends Phaser.Physics.Arcade.Sprite {
     this.setActive(false).setVisible(false);
   }
 
-  activate(kind: PickupKind, payloadId: string, amount: number, tint: number): void {
+  activate(
+    kind: PickupKind,
+    payloadId: string,
+    amount: number,
+    tint: number,
+  ): void {
     this.kind = kind;
     this.payloadId = payloadId;
     this.amount = amount;
 
     this.setTexture(TEXTURE_BY_KIND[kind]);
     this.setTint(tint);
-    this.setScale(kind === 'weapon' ? 1.3 : 1);
+    this.setScale(kind === "weapon" ? 1.3 : 1);
     this.setAlpha(1);
     this.setActive(true).setVisible(true);
 
@@ -52,7 +57,7 @@ export class Pickup extends Phaser.Physics.Arcade.Sprite {
       duration: 620,
       yoyo: true,
       repeat: -1,
-      ease: 'Sine.easeInOut',
+      ease: "Sine.easeInOut",
     });
   }
 
@@ -100,7 +105,9 @@ export class Chest implements Interactable {
     readonly overrideLootTable: ReadonlyArray<WeightedEntry> | null,
     private readonly onOpen: (chest: Chest) => void,
   ) {
-    this.sprite = scene.add.image(x, y, TextureKeys.chest).setDepth(DEPTH.decor);
+    this.sprite = scene.add
+      .image(x, y, TextureKeys.chest)
+      .setDepth(DEPTH.decor);
   }
 
   get x(): number {
@@ -112,7 +119,7 @@ export class Chest implements Interactable {
   }
 
   get promptLabel(): string {
-    return 'Open chest';
+    return "Open chest";
   }
 
   canInteract(): boolean {
@@ -142,7 +149,9 @@ export class Lever implements Interactable {
     readonly channel: string,
     private readonly onToggle: (channel: string, on: boolean) => void,
   ) {
-    this.sprite = scene.add.image(x, y, TextureKeys.lever).setDepth(DEPTH.decor);
+    this.sprite = scene.add
+      .image(x, y, TextureKeys.lever)
+      .setDepth(DEPTH.decor);
   }
 
   get x(): number {
@@ -154,7 +163,7 @@ export class Lever implements Interactable {
   }
 
   get promptLabel(): string {
-    return this.on ? 'Reset lever' : 'Pull lever';
+    return this.on ? "Reset lever" : "Pull lever";
   }
 
   canInteract(): boolean {
@@ -187,7 +196,9 @@ export class Door {
     readonly requiresChannel: string | null,
   ) {
     this.locked = locked;
-    this.sprite = scene.physics.add.sprite(x, y, TextureKeys.door).setDepth(DEPTH.walls);
+    this.sprite = scene.physics.add
+      .sprite(x, y, TextureKeys.door)
+      .setDepth(DEPTH.walls);
     const body = this.sprite.body as Phaser.Physics.Arcade.Body;
     body.setAllowGravity(false);
     body.setImmovable(true);
@@ -215,7 +226,8 @@ export class Door {
     if (this.locked === locked) return;
     this.locked = locked;
     this.applyState(false);
-    if (!locked) EventBus.emit('ui:toast', { message: 'A door opens', tone: 'info' });
+    if (!locked)
+      EventBus.emit("ui:toast", { message: "A door opens", tone: "info" });
   }
 
   private applyState(immediate: boolean): void {
