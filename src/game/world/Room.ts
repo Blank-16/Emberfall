@@ -23,11 +23,13 @@ import {
   type Pickup,
   type PickupKind,
 } from "./Interactables";
+import type { RoomProgress } from "./RoomProgress";
 
 export interface RoomServices {
   readonly scene: Phaser.Scene;
   readonly rng: Rng;
   readonly player: Player;
+  readonly roomProgress: RoomProgress;
   spawnEnemy(enemyId: string, x: number, y: number): Enemy;
   spawnBoss(bossId: string, x: number, y: number): Boss;
   unregisterEnemy(enemy: Enemy): void;
@@ -49,6 +51,7 @@ interface TiledProperty {
 }
 
 interface TiledObject {
+  id: number;
   type?: string;
   name?: string;
   x: number;
@@ -129,6 +132,8 @@ export class Room {
   private readonly exits: ExitTrigger[] = [];
   private readonly processedDeaths = new Set<string>();
   private readonly leverChannels = new Set<string>();
+  private readonly chestObjectIds = new Map<Chest, number>();
+  private bossObjectId: number | null = null;
   private playerStart: Phaser.Math.Vector2 | null = null;
   private clearedInternal = false;
   private transitionArmed = false;
@@ -211,12 +216,16 @@ export class Room {
         case "player_start":
           this.playerStart = new Phaser.Math.Vector2(centerX, centerY);
           break;
-        case "enemy":
-          this.enemies.push(this.services.spawnEnemy(id, centerX, centerY));
+        case "enemy": {
+          const enemy = this.services.spawnEnemy(id, centerX, centerY);
+          this.enemies.push(enemy);
           break;
+        }
         case "boss": {
+          if (this.services.roomProgress.isBossDefeated(object.id)) break;
           const boss = this.services.spawnBoss(id, centerX, centerY);
           this.boss = boss;
+          this.bossObjectId = object.id;
           this.enemies.push(boss);
           break;
         }
@@ -226,20 +235,29 @@ export class Room {
             id,
             readProperty(object, "lootTable"),
           );
-          this.interactables.push(
-            new Chest(scene, centerX, centerY, id, overrideTable, (chest) =>
-              this.openChest(chest),
-            ),
+          const chest = new Chest(
+            scene,
+            centerX,
+            centerY,
+            id,
+            overrideTable,
+            (c) => this.openChest(c),
           );
+          if (this.services.roomProgress.isChestOpened(object.id))
+            chest.markOpened();
+          this.chestObjectIds.set(chest, object.id);
+          this.interactables.push(chest);
           break;
         }
-        case "lever":
-          this.interactables.push(
-            new Lever(scene, centerX, centerY, id, (channel, on) =>
-              this.onLeverToggled(channel, on),
-            ),
+        case "lever": {
+          const lever = new Lever(scene, centerX, centerY, id, (channel, on) =>
+            this.onLeverToggled(channel, on),
           );
+          if (this.services.roomProgress.isChannelUnlocked(id))
+            lever.setOn(true);
+          this.interactables.push(lever);
           break;
+        }
         case "hazard_spike":
           this.hazards.push(
             new SpikeTrap(
@@ -258,8 +276,13 @@ export class Room {
             readProperty(object, "direction") ?? "n",
           ) as Direction;
           const target = String(readProperty(object, "target") ?? "");
-          const locked = Boolean(readProperty(object, "locked"));
+          const rawLocked = Boolean(readProperty(object, "locked"));
           const channel = readProperty(object, "channel");
+          const channelStr = channel != null ? String(channel) : null;
+          const alreadyUnlocked =
+            channelStr !== null &&
+            this.services.roomProgress.isChannelUnlocked(channelStr);
+          const locked = rawLocked && !alreadyUnlocked;
           this.doors.push(
             new Door(
               scene,
@@ -268,7 +291,7 @@ export class Room {
               direction,
               target,
               locked,
-              channel != null ? String(channel) : null,
+              channelStr,
             ),
           );
           break;
@@ -326,6 +349,9 @@ export class Room {
       }
       if (this.processedDeaths.has(enemy.entityId)) continue;
       this.processedDeaths.add(enemy.entityId);
+      if (enemy === this.boss && this.bossObjectId !== null) {
+        this.services.roomProgress.markBossDefeated(this.bossObjectId);
+      }
       this.dropEnemyLoot(enemy);
     }
 
@@ -357,6 +383,10 @@ export class Room {
   }
 
   private openChest(chest: Chest): void {
+    const objectId = this.chestObjectIds.get(chest);
+    if (objectId !== undefined)
+      this.services.roomProgress.markChestOpened(objectId);
+
     const table = chest.overrideLootTable ?? this.definition.lootTable;
     const drops = 2;
     for (let i = 0; i < drops; i += 1) {
@@ -371,8 +401,12 @@ export class Room {
   }
 
   private onLeverToggled(channel: string, on: boolean): void {
-    if (on) this.leverChannels.add(channel);
-    else this.leverChannels.delete(channel);
+    if (on) {
+      this.leverChannels.add(channel);
+      this.services.roomProgress.markChannelUnlocked(channel);
+    } else {
+      this.leverChannels.delete(channel);
+    }
 
     for (const door of this.doors) {
       if (door.isLocked && on && door.requiresChannel === channel)
@@ -525,6 +559,7 @@ export class Room {
     this.pickups.length = 0;
     this.exits.length = 0;
     this.processedDeaths.clear();
+    this.chestObjectIds.clear();
 
     this.wallLayer?.destroy();
     this.map?.destroy();

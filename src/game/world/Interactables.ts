@@ -133,6 +133,12 @@ export class Chest implements Interactable {
     this.onOpen(this);
   }
 
+  /** Restores an already-looted chest's state on room revisit, without re-rolling loot. */
+  markOpened(): void {
+    this.opened = true;
+    this.sprite.setTexture(TextureKeys.chestOpen);
+  }
+
   destroy(): void {
     this.sprite.destroy();
   }
@@ -174,6 +180,12 @@ export class Lever implements Interactable {
     this.on = !this.on;
     this.sprite.setTexture(this.on ? TextureKeys.leverOn : TextureKeys.lever);
     this.onToggle(this.channel, this.on);
+  }
+
+  /** Restores an already-pulled lever's visual state on room revisit, without re-firing onToggle. */
+  setOn(on: boolean): void {
+    this.on = on;
+    this.sprite.setTexture(on ? TextureKeys.leverOn : TextureKeys.lever);
   }
 
   destroy(): void {

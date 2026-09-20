@@ -17,6 +17,7 @@ import { Enemy } from "../entities/Enemy";
 import { Boss } from "../entities/Boss";
 import { Dungeon } from "../world/Dungeon";
 import { Room, type RoomServices } from "../world/Room";
+import { RoomProgress } from "../world/RoomProgress";
 import { Pickup, type PickupKind } from "../world/Interactables";
 import type { Direction } from "../core/types";
 
@@ -28,6 +29,7 @@ export class DungeonScene extends Phaser.Scene {
   private dungeonId = "";
   private dungeon!: Dungeon;
   private rng!: Rng;
+  private roomProgress!: RoomProgress;
   private combat!: CombatSystem;
   private enemyGroup!: Phaser.Physics.Arcade.Group;
   private pickupGroup!: Phaser.Physics.Arcade.Group;
@@ -74,6 +76,7 @@ export class DungeonScene extends Phaser.Scene {
   create(): void {
     const definition = GameData.dungeon(this.dungeonId);
     this.dungeon = new Dungeon(definition);
+    this.roomProgress = new RoomProgress();
     generateTileset(this, definition.id, definition.palette);
 
     this.rng = new Rng();
@@ -171,6 +174,7 @@ export class DungeonScene extends Phaser.Scene {
       scene: this,
       rng: this.rng,
       player: this.player,
+      roomProgress: this.roomProgress,
       spawnEnemy: (enemyId, x, y) => this.createEnemy(enemyId, x, y),
       spawnBoss: (bossId, x, y) => this.createBoss(bossId, x, y),
       unregisterEnemy: (enemy) => this.combat.unregisterTarget(enemy),
