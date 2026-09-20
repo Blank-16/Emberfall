@@ -57,13 +57,13 @@
     {
       "type": "enemy",
       "id": "thorn_slinger",
-      "tx": 7,
+      "tx": 4,
       "ty": 4
     },
     {
       "type": "enemy",
       "id": "thorn_slinger",
-      "tx": 22,
+      "tx": 25,
       "ty": 15
     }
   ]

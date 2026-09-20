@@ -103,8 +103,8 @@ room(
     [
         {"type": "enemy", "id": "husk_thrall", "tx": 10, "ty": 9},
         {"type": "enemy", "id": "husk_thrall", "tx": 19, "ty": 11},
-        {"type": "enemy", "id": "thorn_slinger", "tx": 7, "ty": 4},
-        {"type": "enemy", "id": "thorn_slinger", "tx": 22, "ty": 15},
+        {"type": "enemy", "id": "thorn_slinger", "tx": 4, "ty": 4},
+        {"type": "enemy", "id": "thorn_slinger", "tx": 25, "ty": 15},
     ],
 )
 
@@ -186,7 +186,7 @@ room(
     ],
     [
         {"type": "enemy", "id": "husk_thrall", "tx": 14, "ty": 9},
-        {"type": "enemy", "id": "husk_thrall", "tx": 16, "ty": 11},
+        {"type": "enemy", "id": "husk_thrall", "tx": 16, "ty": 10},
         {"type": "enemy", "id": "thorn_slinger", "tx": 4, "ty": 4},
         {"type": "enemy", "id": "bramble_turret", "tx": 25, "ty": 15},
         {"type": "lever", "id": "cistern_gate", "tx": 14, "ty": 4},

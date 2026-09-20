@@ -557,7 +557,7 @@
           "name": "husk_thrall",
           "type": "enemy",
           "x": 256,
-          "y": 176,
+          "y": 160,
           "width": 16,
           "height": 16,
           "rotation": 0,

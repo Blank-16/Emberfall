@@ -48,5 +48,38 @@ def check(dungeons_path: str, maps_dir: str) -> None:
         print(f"  {len(rooms_by_id)} rooms OK\n")
 
 
+SPAWN_TYPES = ('enemy', 'boss', 'chest', 'lever', 'player_start')
+
+
+def check_spawn_points(maps_dir: str) -> None:
+    """Every enemy/boss/chest/lever/player_start must sit on open floor, not wall geometry.
+    A spawn placed by hand-counting ASCII art can silently land on a wall column -- the
+    object still renders and the game doesn't crash, but the entity is physically embedded
+    in solid geometry and gets stuck fighting the collision resolution forever."""
+    for map_path in sorted(os.listdir(maps_dir)):
+        if not map_path.endswith(".json"):
+            continue
+        built = json.load(open(os.path.join(maps_dir, map_path), encoding="utf-8"))
+        walls = built["layers"][1]["data"]
+        width = built["width"]
+        room_id = map_path[:-5]
+
+        for obj in built["layers"][2]["objects"]:
+            if obj["type"] not in SPAWN_TYPES:
+                continue
+            tile_x = int(obj["x"] // 16)
+            tile_y = int(obj["y"] // 16)
+            index = tile_y * width + tile_x
+            wall_tile = walls[index] if 0 <= index < len(walls) else None
+            assert wall_tile in (0, None), (
+                f"{room_id}: {obj['type']} '{obj.get('name')}' at tile ({tile_x},{tile_y}) "
+                f"sits on a wall tile (index {wall_tile}) -- move it off the wall in author_rooms.py"
+            )
+
+
 if __name__ == "__main__":
-    check(os.path.join(ROOT, "src/game/data/dungeons.json"), os.path.join(ROOT, "public/maps"))
+    dungeons_path = os.path.join(ROOT, "src/game/data/dungeons.json")
+    maps_dir = os.path.join(ROOT, "public/maps")
+    check(dungeons_path, maps_dir)
+    check_spawn_points(maps_dir)
+    print("all spawn points clear of walls")
