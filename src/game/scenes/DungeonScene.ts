@@ -8,6 +8,7 @@ import { Rng } from "../core/Rng";
 import { RunState } from "../core/RunState";
 import { wireSharedPlayerCommands } from "../core/SharedSceneCommands";
 import { GameData } from "../data/GameData";
+import { WorldApiClient } from "../api/WorldApiClient";
 import { CombatSystem } from "../combat/CombatSystem";
 import type { Projectile } from "../combat/Hitbox";
 import { createWeapon } from "../combat/weapons/WeaponFactory";
@@ -66,10 +67,10 @@ export class DungeonScene extends Phaser.Scene {
   preload(): void {
     const definition = GameData.dungeon(this.dungeonId);
     for (const room of definition.rooms) {
-      this.load.tilemapTiledJSON(
-        room.tiledMapKey,
-        `/maps/${room.tiledMapKey}.json`,
-      );
+      const mapUrl = WorldApiClient.isConnected()
+        ? WorldApiClient.getRoomMapUrl(this.dungeonId, room.id)
+        : `/maps/${room.tiledMapKey}.json`;
+      this.load.tilemapTiledJSON(room.tiledMapKey, mapUrl);
     }
   }
 

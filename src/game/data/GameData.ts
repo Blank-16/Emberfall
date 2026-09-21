@@ -4,6 +4,7 @@ import bossesJson from "./bosses.json";
 import dungeonsJson from "./dungeons.json";
 import itemsJson from "./items.json";
 import { AbilityEffectRegistry } from "../combat/AbilityEffectRegistry";
+import { WorldApiClient } from "../api/WorldApiClient";
 import type {
   BossDefinition,
   DungeonDefinition,
@@ -64,9 +65,11 @@ const enemies = indexById(
   "enemies",
 );
 const bosses = indexById(bossesJson as ReadonlyArray<BossDefinition>, "bosses");
-const dungeons = indexById(
-  dungeonsJson as ReadonlyArray<DungeonDefinition>,
-  "dungeons",
+const dungeonsMap = new Map<string, DungeonDefinition>(
+  indexById(
+    dungeonsJson as ReadonlyArray<DungeonDefinition>,
+    "dungeons",
+  ),
 );
 const potions = indexById(
   itemsJson as ReadonlyArray<PotionDefinition>,
@@ -163,14 +166,30 @@ function validate(): void {
     }
   }
 
-  for (const dungeon of dungeons.values()) {
+  validateDungeonsList(dungeonsMap.values());
+}
+
+function checkRoomDrops(ownerId: string, table: ReadonlyArray<{ itemId: string }>): void {
+  const knownItems = new Set<string>([
+    ...potions.keys(),
+    ...weapons.keys(),
+    "none",
+  ]);
+  for (const entry of table) {
+    if (!knownItems.has(entry.itemId))
+      throw new Error(`${ownerId}: unknown drop ${entry.itemId}`);
+  }
+}
+
+function validateDungeonsList(dungeonList: Iterable<DungeonDefinition>): void {
+  for (const dungeon of dungeonList) {
     const roomIds = new Set(dungeon.rooms.map((room) => room.id));
     if (!roomIds.has(dungeon.entryRoomId))
       throw new Error(`${dungeon.id}: missing entry room`);
     if (!roomIds.has(dungeon.bossRoomId))
       throw new Error(`${dungeon.id}: missing boss room`);
     for (const room of dungeon.rooms) {
-      checkDrops(room.id, room.lootTable);
+      checkRoomDrops(room.id, room.lootTable);
       for (const exit of room.exits) {
         if (!roomIds.has(exit.targetRoomId)) {
           throw new Error(
@@ -184,11 +203,30 @@ function validate(): void {
 
 validate();
 
+export async function syncDungeonsFromBackend(): Promise<boolean> {
+  try {
+    const health = await WorldApiClient.checkHealth();
+    if (!health) return false;
+    const fetched = await WorldApiClient.fetchDungeons();
+    if (!Array.isArray(fetched) || fetched.length === 0) return false;
+    validateDungeonsList(fetched);
+    dungeonsMap.clear();
+    for (const d of fetched) {
+      dungeonsMap.set(d.id, d);
+    }
+    WorldApiClient.setConnected(true);
+    return true;
+  } catch {
+    WorldApiClient.setConnected(false);
+    return false;
+  }
+}
+
 export const GameData = {
   weapons,
   enemies,
   bosses,
-  dungeons,
+  dungeons: dungeonsMap,
   potions,
 
   weapon(id: string): WeaponStats {
@@ -210,7 +248,7 @@ export const GameData = {
   },
 
   dungeon(id: string): DungeonDefinition {
-    const found = dungeons.get(id);
+    const found = dungeonsMap.get(id);
     if (!found) throw new Error(`Unknown dungeon: ${id}`);
     return found;
   },

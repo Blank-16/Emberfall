@@ -15,6 +15,18 @@ export default defineConfig({
       ),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+      "/health": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     target: "es2022",
     rollupOptions: {

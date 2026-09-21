@@ -1,14 +1,19 @@
 import { GameData } from "@game/data/GameData";
 import { GameBridge } from "@game/core/GameBridge";
+import { WorldApiClient } from "@game/api/WorldApiClient";
 
 export function DungeonSelect(): JSX.Element {
   const dungeons = [...GameData.dungeons.values()];
+  const isApi = WorldApiClient.isConnected();
 
   return (
     <div className="dungeon-select-list">
       {dungeons.map((dungeon) => (
         <div key={dungeon.id} className="dungeon-card plate">
-          <span className="dungeon-name">{dungeon.displayName}</span>
+          <span className="dungeon-name">
+            {dungeon.displayName}
+            {isApi ? " (API)" : ""}
+          </span>
           <span style={{ fontSize: 11, color: "var(--parchment-dim)" }}>
             {dungeon.rooms.length} rooms
           </span>
