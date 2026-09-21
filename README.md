@@ -60,3 +60,9 @@ gating, the swap-cancel window, health/shield/i-frame interaction, status-effect
 enemy FSM's state transitions, weighted loot rolling) was additionally exercised with a throwaway
 Node smoke test during development — not shipped, since it's not part of the app, but every one of
 those mechanics ran under real assertions at least once before being called done.
+
+## Phase 2 backend foundation
+
+A Go world API now reads the existing dungeon graph, authored room layouts, and generated Tiled maps without duplicating or rewriting those files. See [`backend/README.md`](backend/README.md) for setup, endpoints, and tests.
+
+Start it from the `backend/` directory with `EMBERFALL_DATA_DIR=.. go run ./cmd/server` (PowerShell: `$env:EMBERFALL_DATA_DIR=".."; go run ./cmd/server`). The default API address is `http://localhost:8080`.
